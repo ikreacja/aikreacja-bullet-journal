@@ -11,7 +11,7 @@ Darmowy kurs do przeklikania. Uczy prowadzenia notatek odręcznych i porządkowa
 
 ## Publikacja
 
-Pojedynczy plik `index.html`, bez buildu. Vercel: preset "Other", bez komendy budowania, katalog wyjściowy = katalog główny.
+Pojedynczy plik `index.html`, bez buildu. GitHub Pages z gałęzi `main`, katalog główny. Adres: https://ikreacja.github.io/aikreacja-bullet-journal/
 
 ## Autor
 
