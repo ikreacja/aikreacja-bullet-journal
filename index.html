@@ -670,9 +670,9 @@
     <!-- Górne zakładki i pasek postępu -->
     <div class="top-bar">
         <div class="ribbons">
-            <button class="ribbon-tab ribbon-index" onclick="goToSpread(1)" title="Przejdź do Spisu Treści">🔖 Indeks (str. 1-2)</button>
-            <button class="ribbon-tab ribbon-key" onclick="toggleKeyModal()" title="Ściągawka ze wszystkich symboli BuJo">🔑 Klucz Symboli</button>
-            <button class="ribbon-tab ribbon-guide" onclick="toggleGuideModal()" title="Wizualna ściągawka Quick Reference Guide">🗺️ Schemat 4 Kroków</button>
+            <button class="ribbon-tab ribbon-index" onclick="goToSpread(1)" title="Przejdź do spisu treści">🔖 Indeks (str. 1-2)</button>
+            <button class="ribbon-tab ribbon-key" onclick="toggleKeyModal()" title="Ściągawka ze wszystkich symboli BuJo">🔑 Klucz symboli</button>
+            <button class="ribbon-tab ribbon-guide" onclick="toggleGuideModal()" title="Wizualna ściągawka Quick Reference Guide">🗺️ Schemat 4 kroków</button>
             <button class="ribbon-tab ribbon-sandbox" onclick="goToSpread(11)" title="Otwórz wolną kartkę do testów">✏️ Piaskownica BuJo</button>
         </div>
         <div class="progress-container">
@@ -717,7 +717,7 @@
         <p class="author-note">Nieoficjalny przewodnik oparty na książce "The Bullet Journal Method" Rydera Carrolla. Nie jest powiązany z autorem ani z marką Bullet Journal.</p>
     </aside>
 
-    <!-- Modal 1: Klucz Symboli (Ściągawka) -->
+    <!-- Modal 1: Klucz symboli (Ściągawka) -->
     <div class="modal-overlay" id="key-modal" onclick="if(event.target===this) toggleKeyModal()">
         <div class="modal-card">
             <div class="sketch-header-box">BULLETS AND SIGNIFIERS (KLUCZ)</div>
@@ -742,7 +742,7 @@
         </div>
     </div>
 
-    <!-- Modal 2: Schemat 4 Kroków (Quick Reference Guide - Tiny Ray of Sunshine) -->
+    <!-- Modal 2: Schemat 4 kroków (Quick Reference Guide - Tiny Ray of Sunshine) -->
     <div class="modal-overlay" id="guide-modal" onclick="if(event.target===this) toggleGuideModal()">
         <div class="modal-card" style="max-width: 820px;">
             <div class="sketch-header-box">BULLET⚡JOURNAL QUICK REFERENCE GUIDE</div>
@@ -751,7 +751,7 @@
             <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                 <div class="comp-box">
                     <div class="sketch-header-box" style="font-size:0.95rem;">STEP 1: INDEX</div>
-                    <p style="font-size:0.82rem;">Przeznacz pierwsze 4 strony na Indeks. Gdy dodajesz nową kolekcję, wpisz jej temat i numery stron. <strong>Pro Tip:</strong> Indeksuj tylko to, do czego będziesz wracać później.</p>
+                    <p style="font-size:0.82rem;">Przeznacz pierwsze 4 strony na indeks. Gdy dodajesz nową kolekcję, wpisz jej temat i numery stron. <strong>Pro Tip:</strong> Indeksuj tylko to, do czego będziesz wracać później.</p>
                 </div>
                 <div class="comp-box">
                     <div class="sketch-header-box" style="font-size:0.95rem;">STEP 2: FUTURE LOG</div>
@@ -787,7 +787,7 @@
             { id: 2, text: "Przygotować prezentację dla zarządu", bullet: "•", sig: "", struck: false, hint: "Super pilne! Dodaj gwiazdkę (*) po lewej stronie kropki" },
             { id: 3, text: "Naprawić stary toster", bullet: "•", sig: "", struck: false, hint: "Nieaktualne (kupiliśmy nowy) – kliknij 'Wykreśl linię', aby przekreślić cały wiersz" },
             { id: 4, text: "Odebrać paczkę z paczkomatu", bullet: "•", sig: "", struck: false, hint: "Przełożone na jutro – kliknij kropkę i zmigruj na (>)" },
-            { id: 5, text: "Sprawdzić ofertę wakacji w Portugalii", bullet: "•", sig: "", struck: false, hint: "Wymaga researchu – dodaj po lewej symbol Oka (👁)" }
+            { id: 5, text: "Sprawdzić ofertę wakacji w Portugalii", bullet: "•", sig: "", struck: false, hint: "Wymaga researchu – dodaj po lewej symbol oka (👁)" }
         ],
         dailyLogEntries: [
             { type: "•", text: "Kupić kawę ziarnistą" },
@@ -834,17 +834,17 @@
 
     // ==================== DEFINICJA WSZYSTKICH 12 ROZKŁADÓWEK ====================
     const spreadsMeta = [
-        { id: 0, title: "Okładka i 4 Filary Metody", pages: "i - ii", indexable: false },
-        { id: 1, title: "Krok 1: Indeks (Spis Treści)", pages: "1 - 2", indexable: false },
-        { id: 2, title: "Dlaczego Analog? + Zadania (•)", pages: "3 - 4", indexable: true },
-        { id: 3, title: "Wydarzenia (O) oraz Notatki (–)", pages: "5 - 6", indexable: true },
-        { id: 4, title: "Życie Kropki, Wykreślanie i Oznaczenia (*, !, 👁)", pages: "7 - 8", indexable: true },
-        { id: 5, title: "Krok 4: Daily Log i Wcięcia (Nesting)", pages: "9 - 10", indexable: true },
-        { id: 6, title: "Krok 3: Monthly Log i Kronika Wspomnień", pages: "11 - 12", indexable: true },
-        { id: 7, title: "Krok 2: Future Log i Metoda Alastaira", pages: "13 - 14", indexable: true },
-        { id: 8, title: "Kolekcje Niestandardowe i Nawlekanie", pages: "15 - 16", indexable: true },
-        { id: 9, title: "Sztuka Migracji (>, < oraz Przekreślanie linii)", pages: "17 - 18", indexable: true },
-        { id: 10, title: "Refleksja (AM/PM) i Zasada 5x Dlaczego", pages: "19 - 20", indexable: true },
+        { id: 0, title: "Okładka i 4 filary metody", pages: "i - ii", indexable: false },
+        { id: 1, title: "Krok 1: Indeks (spis treści)", pages: "1 - 2", indexable: false },
+        { id: 2, title: "Dlaczego analog? + Zadania (•)", pages: "3 - 4", indexable: true },
+        { id: 3, title: "Wydarzenia (O) oraz notatki (–)", pages: "5 - 6", indexable: true },
+        { id: 4, title: "Życie kropki, wykreślanie i oznaczenia (*, !, 👁)", pages: "7 - 8", indexable: true },
+        { id: 5, title: "Krok 4: Daily Log i wcięcia (nesting)", pages: "9 - 10", indexable: true },
+        { id: 6, title: "Krok 3: Monthly Log i kronika wspomnień", pages: "11 - 12", indexable: true },
+        { id: 7, title: "Krok 2: Future Log i metoda Alastaira", pages: "13 - 14", indexable: true },
+        { id: 8, title: "Kolekcje niestandardowe i nawlekanie", pages: "15 - 16", indexable: true },
+        { id: 9, title: "Sztuka migracji (>, < oraz przekreślanie linii)", pages: "17 - 18", indexable: true },
+        { id: 10, title: "Refleksja (AM/PM) i zasada 5x dlaczego", pages: "19 - 20", indexable: true },
         { id: 11, title: "Piaskownica BuJo (Twój własny arkusz)", pages: "21 - 22", indexable: true }
     ];
 
@@ -884,9 +884,9 @@
             </div>
             <p>Według oficjalnego przewodnika <em>Thorough Guide to the Bullet Journal System</em> (Kim Alvarez), cała metoda opiera się na <strong>4 prostych filarach</strong>:</p>
             <ol>
-                <li><strong>Indeksowanie (Indexing):</strong> Numerujesz strony i dopisujesz tematy do Spisu Treści na początku zeszytu.</li>
-                <li><strong>Kolekcje (Collections):</strong> Modułowe szablony (<em>Future Log, Monthly Log, Daily Log</em> oraz listy własne). Z definicji każda strona z tematem w BuJo jest Kolekcją!</li>
-                <li><strong>Szybkie Notowanie (Rapid-Logging):</strong> Obiektywny, skrócony zapis za pomocą Punktorów (•, O, –) i Oznaczeń (*, !, 👁).</li>
+                <li><strong>Indeksowanie (Indexing):</strong> Numerujesz strony i dopisujesz tematy do spisu treści na początku zeszytu.</li>
+                <li><strong>Kolekcje (Collections):</strong> Modułowe szablony (<em>Future Log, Monthly Log, Daily Log</em> oraz listy własne). Z definicji każda strona z tematem w BuJo jest kolekcją!</li>
+                <li><strong>Szybkie notowanie (Rapid-Logging):</strong> Obiektywny, skrócony zapis za pomocą punktorów (•, O, –) i oznaczeń (*, !, 👁).</li>
                 <li><strong>Migracja (Migration):</strong> Comiesięczny przegląd, w którym odsiewasz szum (wykreślasz nieistotne linie) i ręcznie przepisujesz tylko wartościowe zadania.</li>
             </ol>
             <span class="page-number">i</span>
@@ -903,7 +903,7 @@
                         W tym kursie po lewej stronie zobaczysz <strong>rysunkowe makiety rozkładówek</strong> (wzorowane na <em>Quick Reference Guide</em>), a po prawej przetestujesz działanie każdego symbolu i wykreślania.
                     </p>
                     <button class="btn-action" style="margin-top:12px; font-size:0.95rem; padding:10px 22px;" onclick="changeSpread(1)">
-                        Otwórz Krok 1: Indeks →
+                        Otwórz krok 1: Indeks →
                     </button>
                 </div>
             </div>
@@ -914,11 +914,11 @@
     // -------------------- ROZKŁADÓWKA 1: INDEKS (SPIS TREŚCI) --------------------
     function renderSpread1(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Pierwsza Kolekcja • Strony 1–4</span>
+            <span class="module-badge">Pierwsza kolekcja • Strony 1–4</span>
             <div class="sketch-header-box">STEP 1: INDEX (SPIS TREŚCI)</div>
             <p>Indeks to geniusz metody Bullet Journal. Przeznaczasz na niego <strong>pierwsze 2–4 strony notatnika</strong>. Aby działał, musisz numerować kolejne kartki zeszytu.</p>
             
-            <!-- Rysunkowy diagram rozkładówki Indeksu jak w Tiny Ray of Sunshine -->
+            <!-- Rysunkowy diagram rozkładówki indeksu jak w Tiny Ray of Sunshine -->
             <div class="mini-spread-diagram">
                 <div class="mini-spread-page">
                     <div class="mini-spread-title"><span>INDEX</span></div>
@@ -937,7 +937,7 @@
             </div>
 
             <div class="pro-tip-box">
-                <strong>PRO TIP (z przewodnika):</strong> Indeksuj <em>tylko te kolekcje, do których będziesz wracać w przyszłości</em>! Nie wpisuj do Indeksu każdego pojedynczego Dziennika Codziennego (Daily Log) – wystarczy zaindeksować początek danego miesiąca.
+                <strong>PRO TIP (z przewodnika):</strong> Indeksuj <em>tylko te kolekcje, do których będziesz wracać w przyszłości</em>! Nie wpisuj do indeksu każdego pojedynczego dziennika codziennego (Daily Log) – wystarczy zaindeksować początek danego miesiąca.
             </div>
             <span class="page-number">1</span>
         `;
@@ -961,7 +961,7 @@
                 <h3 class="workshop-title">🧭 INTERAKTYWNY INDEKS KURSU</h3>
                 <span style="font-size:0.8rem; color:var(--ink-muted);">Notes: <strong>${state.userName || 'Czytelnik'}</strong></span>
             </div>
-            <p style="font-size:0.86rem;">Ukończenie ćwiczenia na danej rozkładówce <strong>automatycznie dopisuje jej numery stron</strong> do tego Indeksu. Kliknij dowolny temat, aby przejść bezpośrednio do wybranej strony:</p>
+            <p style="font-size:0.86rem;">Ukończenie ćwiczenia na danej rozkładówce <strong>automatycznie dopisuje jej numery stron</strong> do tego indeksu. Kliknij dowolny temat, aby przejść bezpośrednio do wybranej strony:</p>
             <ul style="list-style:none; padding:0; margin-top:8px;">
                 ${listHtml}
             </ul>
@@ -972,7 +972,7 @@
     // -------------------- ROZKŁADÓWKA 2: ANALOG VS CYFROWY & ZADANIA (•) --------------------
     function renderSpread2(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł I • Szybkie Notowanie (Rapid Logging)</span>
+            <span class="module-badge">Moduł I • Szybkie notowanie (Rapid Logging)</span>
             <div class="sketch-header-box">RAPID LOGGING & TASK BULLET (•)</div>
             <p>Dlaczego w erze smartfonów wracamy do papieru i długopisu? Ryder Carroll wskazuje na przewagę poznawczą odręcznego pisania:</p>
             <div class="comparison-grid">
@@ -985,7 +985,7 @@
                     Aktywuje w mózgu <em>układ siatkowaty (RAS)</em>, wymusza skupienie i syntezę myśli przed postawieniem słów na papierze.
                 </div>
             </div>
-            <p><strong>Rapid Logging</strong> to obiektywny, skrócony zapis. Nie piszemy wypracowań – zapisujemy samą esencję działania poprzedzoną <strong>Kropką <span class="sym-tag">•</span> (Task Bullet)</strong>.</p>
+            <p><strong>Rapid Logging</strong> to obiektywny, skrócony zapis. Nie piszemy wypracowań – zapisujemy samą esencję działania poprzedzoną <strong>kropką <span class="sym-tag">•</span> (Task Bullet)</strong>.</p>
             <div class="handwritten-card">
                 <span class="card-label">Przykład z przewodnika</span>
                 <div class="struck" style="font-size:1.15rem;">• Muszę pamiętać, żeby umyć samochód i wyczyścić rynny przed deszczem</div>
@@ -1057,7 +1057,7 @@
     // -------------------- ROZKŁADÓWKA 3: WYDARZENIA (O) I NOTATKI (–) --------------------
     function renderSpread3(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł I • Trzy Kategorie Punktorów</span>
+            <span class="module-badge">Moduł I • Trzy kategorie punktorów</span>
             <div class="sketch-header-box">TASKS (•), EVENTS (O) & NOTES (–)</div>
             <p>W Rapid Loggingu wszystko, co zapisujesz, trafia do jednej z trzech kategorii punktorów:</p>
             <ul>
@@ -1123,7 +1123,7 @@
     // -------------------- ROZKŁADÓWKA 4: ŻYCIE KROPKI, WYKREŚLANIE I SIGNIFIERS --------------------
     function renderSpread4(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł I • Ewolucja Kropki, Wykreślanie i Oznaczenia</span>
+            <span class="module-badge">Moduł I • Ewolucja kropki, wykreślanie i oznaczenia</span>
             <div class="sketch-header-box">BULLET STATES & SIGNIFIERS (* ! 👁)</div>
             <p>W książce Rydera Carrolla bardzo ważne jest rozróżnienie między <strong>wykonaniem zadania</strong> a <strong>porzuceniem zadania</strong>:</p>
             
@@ -1169,7 +1169,7 @@
 
         right.innerHTML = `
             <div class="workshop-header">
-                <h3 class="workshop-title">⚡ ĆWICZENIE 3: Symulator Dnia i Wykreślania</h3>
+                <h3 class="workshop-title">⚡ ĆWICZENIE 3: Symulator dnia i wykreślania</h3>
                 ${state.completedSpreads[4] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
             </div>
             <p style="font-size:0.84rem;">Klikaj w pole przed kropką (<span class="sym-tag">*</span>, <span class="sym-tag">!</span>, <span class="sym-tag">👁</span>), w samą kropkę (<span class="sym-tag">•</span> ➔ <span class="sym-tag">X</span> ➔ <span class="sym-tag">&gt;</span> ➔ <span class="sym-tag">&lt;</span>) oraz w przycisk <strong>"Wykreśl linię"</strong>:</p>
@@ -1206,7 +1206,7 @@
     // -------------------- ROZKŁADÓWKA 5: DAILY LOG --------------------
     function renderSpread5(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł II • Codzienna Przestrzeń Robocza</span>
+            <span class="module-badge">Moduł II • Codzienna przestrzeń robocza</span>
             <div class="sketch-header-box">STEP 4: DAILY LOG (DZIENNIK CODZIENNY)</div>
             <p>Daily Log to serce Twojego notatnika używane dzień po dniu. Jako nagłówek wpisujesz skrót dnia tygodnia i datę (np. <strong>MON / 6</strong>), a pod spodem na bieżąco notujesz zadania, wydarzenia i notatki.</p>
             
@@ -1253,7 +1253,7 @@
                 <h3 class="workshop-title">📅 ĆWICZENIE 4: Prowadzenie Daily Logu</h3>
                 ${state.completedSpreads[5] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
             </div>
-            <p style="font-size:0.86rem;">Dopisz przynajmniej <strong>2 nowe wpisy</strong> do dzisiejszego Dziennika Codziennego (możesz użyć też podzadania z wcięciem):</p>
+            <p style="font-size:0.86rem;">Dopisz przynajmniej <strong>2 nowe wpisy</strong> do dzisiejszego dziennika codziennego (możesz użyć też podzadania z wcięciem):</p>
             
             <div class="handwritten-card" style="min-height:195px;">
                 <div style="border-bottom:1.5px solid #222; font-weight:bold; margin-bottom:6px;">WED / 14</div>
@@ -1289,9 +1289,9 @@
     // -------------------- ROZKŁADÓWKA 6: DZIENNIK MIESIĘCZNY (MONTHLY LOG) --------------------
     function renderSpread6(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł II • Widok z Lotu Ptaka</span>
+            <span class="module-badge">Moduł II • Widok z lotu ptaka</span>
             <div class="sketch-header-box">STEP 3: MONTHLY LOG (DZIENNIK MIESIĘCZNY)</div>
-            <p>Tworzony na początku miesiąca na dwóch sąsiadujących stronach: <strong>Lewa strona to Oś Kalendarza</strong> (dni 1–30 z literą dnia tygodnia), a <strong>Prawa strona to Lista Zadań (Tasks)</strong> na ten miesiąc.</p>
+            <p>Tworzony na początku miesiąca na dwóch sąsiadujących stronach: <strong>Lewa strona to oś kalendarza</strong> (dni 1–30 z literą dnia tygodnia), a <strong>Prawa strona to lista zadań (Tasks)</strong> na ten miesiąc.</p>
             
             <!-- Diagram rozkładówki Monthly Log jak na obrazku Quick Reference Guide -->
             <div class="mini-spread-diagram">
@@ -1317,7 +1317,7 @@
             </div>
 
             <div class="pro-tip-box">
-                <strong>PRO TIP (z Quick Reference Guide):</strong> Wykorzystuj oś kalendarza po lewej stronie również jako <strong>Kronikę Wspomnień (Notable Snippets)</strong>! Dopisuj tam po fakcie krótkie migawki z życia (np. <em>5 S – Widziałem się z rodzicami</em>, <em>10 F – Nowy telefon</em>), do których miło będzie wrócić po latach.
+                <strong>PRO TIP (z Quick Reference Guide):</strong> Wykorzystuj oś kalendarza po lewej stronie również jako <strong>kronikę wspomnień (Notable Snippets)</strong>! Dopisuj tam po fakcie krótkie migawki z życia (np. <em>5 S – Widziałem się z rodzicami</em>, <em>10 F – Nowy telefon</em>), do których miło będzie wrócić po latach.
             </div>
             <span class="page-number">11</span>
         `;
@@ -1326,10 +1326,10 @@
 
         right.innerHTML = `
             <div class="workshop-header">
-                <h3 class="workshop-title">🗓️ ĆWICZENIE 5: Monthly Log + Wspomnienia</h3>
+                <h3 class="workshop-title">🗓️ ĆWICZENIE 5: Monthly Log + wspomnienia</h3>
                 ${state.completedSpreads[6] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
             </div>
-            <p style="font-size:0.85rem;">Wykonaj 3 akcje na makiecie miesiąca: 1) Dodaj wspomnienie (<em>Snippet</em>) przy <strong>12 Пt</strong>, 2) Wpisz spotkanie przy <strong>15 Пn</strong>, 3) Dodaj zadanie miesięczne po prawej stronie:</p>
+            <p style="font-size:0.85rem;">Wykonaj 3 akcje na makiecie miesiąca: 1) Dodaj wspomnienie (<em>Snippet</em>) przy <strong>12 Pt</strong>, 2) Wpisz spotkanie przy <strong>15 Pn</strong>, 3) Dodaj zadanie miesięczne po prawej stronie:</p>
             
             <div class="mini-spread-diagram" style="min-height:220px; font-size:1.22rem;">
                 <div class="mini-spread-page">
@@ -1355,9 +1355,9 @@
     // -------------------- ROZKŁADÓWKA 7: DZIENNIK PRZYSZŁOŚCI (FUTURE LOG) --------------------
     function renderSpread7(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł II • Planowanie Długoterminowe</span>
+            <span class="module-badge">Moduł II • Planowanie długoterminowe</span>
             <div class="sketch-header-box">STEP 2: FUTURE LOG (DZIENNIK PRZYSZŁOŚCI)</div>
-            <p>Zaraz za Indeksem rezerwujemy 2–4 strony na <strong>Future Log</strong>. Dzielimy je poziomymi liniami na 6 sekcji miesięcznych. Trafiają tu wydarzenia i zadania przypadające na kolejne miesiące (oznaczone strzałką w lewo <span class="sym-tag">&lt;</span>).</p>
+            <p>Zaraz za indeksem rezerwujemy 2–4 strony na <strong>Future Log</strong>. Dzielimy je poziomymi liniami na 6 sekcji miesięcznych. Trafiają tu wydarzenia i zadania przypadające na kolejne miesiące (oznaczone strzałką w lewo <span class="sym-tag">&lt;</span>).</p>
             
             <!-- Diagram rozkładówki Future Log jak na obrazku Quick Reference Guide -->
             <div class="mini-spread-diagram">
@@ -1378,7 +1378,7 @@
             </div>
 
             <div class="pro-tip-box">
-                <strong>WARIACJE Z PRZEWODNIKA:</strong> Na dole planszy <em>Quick Reference Guide</em> Kim Alvarez wymienia świetne alternatywy dla klasycznego Future Logu: <strong>Metodę Alastaira (Alastair Method)</strong> – w której rysujesz wąskie kolumny z inicjałami miesięcy (J, F, M, A, M, J) i stawiasz kropkę w odpowiedniej kolumnie obok zadania – oraz system <strong>Calendex</strong>.
+                <strong>WARIACJE Z PRZEWODNIKA:</strong> Na dole planszy <em>Quick Reference Guide</em> Kim Alvarez wymienia świetne alternatywy dla klasycznego Future Logu: <strong>metodę Alastaira (Alastair Method)</strong> – w której rysujesz wąskie kolumny z inicjałami miesięcy (J, F, M, A, M, J) i stawiasz kropkę w odpowiedniej kolumnie obok zadania – oraz system <strong>Calendex</strong>.
             </div>
             <span class="page-number">13</span>
         `;
@@ -1421,18 +1421,18 @@
     // -------------------- ROZKŁADÓWKA 8: KOLEKCJE NIESTANDARDOWE --------------------
     function renderSpread8(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł II • Nieskończone Możliwości</span>
+            <span class="module-badge">Moduł II • Nieskończone możliwości</span>
             <div class="sketch-header-box">COLLECTIONS (KOLEKCJE POWIĄZANYCH MYŚLI)</div>
-            <p>W przewodniku <em>Tiny Ray of Sunshine</em> czytamy: <strong>„Każdy wpis w Bullet Journalu jest z definicji Kolekcją”</strong>. Kiedy chcesz zebrać powiązane ze sobą pomysły (listę zakupów, plan projektu, notatki ze spotkań czy książki), po prostu:</p>
+            <p>W przewodniku <em>Tiny Ray of Sunshine</em> czytamy: <strong>„Każdy wpis w Bullet Journalu jest z definicji kolekcją”</strong>. Kiedy chcesz zebrać powiązane ze sobą pomysły (listę zakupów, plan projektu, notatki ze spotkań czy książki), po prostu:</p>
             <ol>
                 <li>Otwierasz <strong>najbliższą czystą rozkładówkę</strong> w notatniku.</li>
                 <li>Nadajesz jej <strong>Tytuł (Topic)</strong> i wypełniasz za pomocą <em>Bullets & Signifiers</em>.</li>
-                <li>Dopisujesz numer strony do <strong>Indeksu</strong> na początku zeszytu!</li>
+                <li>Dopisujesz numer strony do <strong>indeksu</strong> na początku zeszytu!</li>
             </ol>
             <div class="handwritten-card">
-                <span class="card-label">Przykład z Indeksu Kim Alvarez</span>
+                <span class="card-label">Przykład z indeksu Kim Alvarez</span>
                 <div><strong>Meetings (Spotkania): 7, 11–12</strong></div>
-                <div style="font-size:1.15rem; color:#444;">Nawet jeśli Twoje notatki ze spotkań są rozrzucone na stronie 7 oraz stronach 11–12 pomiędzy codziennymi zapiskami, jeden wpis w Indeksie spina je w całość!</div>
+                <div style="font-size:1.15rem; color:#444;">Nawet jeśli Twoje notatki ze spotkań są rozrzucone na stronie 7 oraz stronach 11–12 pomiędzy codziennymi zapiskami, jeden wpis w indeksie spina je w całość!</div>
             </div>
             <span class="page-number">15</span>
         `;
@@ -1443,7 +1443,7 @@
 
         right.innerHTML = `
             <div class="workshop-header">
-                <h3 class="workshop-title">📚 ĆWICZENIE 7: Własna Kolekcja i Indeksowanie</h3>
+                <h3 class="workshop-title">📚 ĆWICZENIE 7: Własna kolekcja i indeksowanie</h3>
                 ${state.completedSpreads[8] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
             </div>
             <p style="font-size:0.86rem;">Na stronie 16 otworzyliśmy nową kolekcję. Możesz dopisać do niej własną pozycję, a następnie kliknij przycisk poniżej, aby zaindeksować stronę:</p>
@@ -1459,9 +1459,9 @@
             </div>
 
             <button class="btn-action" onclick="state.customIndexed=true; saveState(); renderCurrentSpread();">
-                📌 Dopisz "Książki do przeczytania: 16" do Indeksu
+                📌 Dopisz "Książki do przeczytania: 16" do indeksu
             </button>
-            ${state.customIndexed ? `<p style="color:var(--ink-green); font-size:0.84rem; margin-top:8px;">✓ Gotowe! Kolekcja została trwale zapisana w Indeksie.</p>` : ''}
+            ${state.customIndexed ? `<p style="color:var(--ink-green); font-size:0.84rem; margin-top:8px;">✓ Gotowe! Kolekcja została trwale zapisana w indeksie.</p>` : ''}
             <span class="page-number">16</span>
         `;
     }
@@ -1477,7 +1477,7 @@
     // -------------------- ROZKŁADÓWKA 9: SZTUKA MIGRACJI (NAPRAWIONE WYKREŚLANIE LINII!) --------------------
     function renderSpread9(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł III • Fundament Systemu</span>
+            <span class="module-badge">Moduł III • Fundament systemu</span>
             <div class="sketch-header-box">MIGRATION (SZTUKA MIGRACJI)</div>
             <div class="bujo-quote">
                 „Migracja to różnica między byciem zajętym a byciem produktywnym.” – Ryder Carroll
@@ -1506,7 +1506,7 @@
                         <strong>${sym}</strong> ${it.text}
                     </span>
                     <div style="display:flex; gap:3px; flex-shrink:0;">
-                        <button class="btn-outline ${it.decision==='migrate'?'selected':''}" style="padding:2px 7px; font-size:0.72rem;" onclick="decideMigration(${idx}, 'migrate')" title="Przepisz na Nowy Miesiąc">Zmigruj (&gt;)</button>
+                        <button class="btn-outline ${it.decision==='migrate'?'selected':''}" style="padding:2px 7px; font-size:0.72rem;" onclick="decideMigration(${idx}, 'migrate')" title="Przepisz na nowy miesiąc">Zmigruj (&gt;)</button>
                         <button class="btn-outline ${it.decision==='schedule'?'selected':''}" style="padding:2px 7px; font-size:0.72rem;" onclick="decideMigration(${idx}, 'schedule')" title="Przenieś do Future Log">Future (&lt;)</button>
                         <button class="btn-outline ${it.decision==='strike'?'selected':''}" style="padding:2px 7px; font-size:0.72rem;" onclick="decideMigration(${idx}, 'strike')" title="Przekreśl całą linię tekstu">Wykreśl linię</button>
                     </div>
@@ -1526,7 +1526,7 @@
 
         right.innerHTML = `
             <div class="workshop-header">
-                <h3 class="workshop-title">🔄 ĆWICZENIE 8: Praktyczna Migracja</h3>
+                <h3 class="workshop-title">🔄 ĆWICZENIE 8: Praktyczna migracja</h3>
                 ${state.completedSpreads[9] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
             </div>
             <p style="font-size:0.84rem;">Podejmij decyzję dla 4 zaległych zadań ze starego miesiąca. Zobaczysz, jak przycisk <strong>"Wykreśl linię"</strong> przekreśla cały nieistotny wiersz wraz z kropką:</p>
@@ -1553,7 +1553,7 @@
     // -------------------- ROZKŁADÓWKA 10: REFLEKSJA I 5x DLACZEGO --------------------
     function renderSpread10(left, right) {
         left.innerHTML = `
-            <span class="module-badge">Moduł III • Nawyk Regularnego Przeglądu</span>
+            <span class="module-badge">Moduł III • Nawyk regularnego przeglądu</span>
             <div class="sketch-header-box">DAILY REFLECTION & 5 WHYS</div>
             <p>Na planszy <em>Quick Reference Guide</em> pod krokiem Daily Log znajduje się kluczowa wskazówka: <strong>„PRO TIP: Review Regularly (Przeglądaj regularnie)”</strong>.</p>
             <ul>
@@ -1572,7 +1572,7 @@
 
         right.innerHTML = `
             <div class="workshop-header">
-                <h3 class="workshop-title">🧘 ĆWICZENIE 9: Codzienny Rytuał BuJo</h3>
+                <h3 class="workshop-title">🧘 ĆWICZENIE 9: Codzienny rytuał BuJo</h3>
                 ${state.completedSpreads[10] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
             </div>
             <p style="font-size:0.86rem;">Zaznacz 3 filary codziennej refleksji i wpisz swoją główną intencję na ten tydzień:</p>
@@ -1615,7 +1615,7 @@
         state.completedSpreads[11] = true;
 
         left.innerHTML = `
-            <span class="module-badge">Zakończenie Kursu • Złote Zasady</span>
+            <span class="module-badge">Zakończenie kursu • Złote zasady</span>
             <div class="sketch-header-box">ENDLESS POSSIBILITIES!</div>
             <p>Gratulacje${state.userName ? ', <strong>' + state.userName + '</strong>' : ''}! Znasz już cały system Rydera Carrolla oraz wizualny przewodnik <em>Tiny Ray of Sunshine</em>. Pamiętaj o najważniejszych wskazówkach na start:</p>
             <ol>
@@ -1624,8 +1624,8 @@
                 <li><strong>Powrót w każdej chwili:</strong> Jeśli pominiesz kilka dni lub tygodni, po prostu wpisz dzisiejszą datę i pisz dalej.</li>
             </ol>
             <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
-                <button class="btn-outline" onclick="toggleKeyModal()">🔑 Klucz Symboli</button>
-                <button class="btn-outline" onclick="toggleGuideModal()">🗺️ Schemat 4 Kroków</button>
+                <button class="btn-outline" onclick="toggleKeyModal()">🔑 Klucz symboli</button>
+                <button class="btn-outline" onclick="toggleGuideModal()">🗺️ Schemat 4 kroków</button>
                 <button class="btn-outline" onclick="resetCourse()">🔄 Wyczyść postęp</button>
             </div>
             <span class="page-number">21</span>
@@ -1648,7 +1648,7 @@
         right.innerHTML = `
             <div class="workshop-header">
                 <h3 class="workshop-title">✏️ PIASKOWNICA BUJO (Twój arkusz testowy)</h3>
-                <span class="stamp-completed">Wolna Kartka</span>
+                <span class="stamp-completed">Wolna kartka</span>
             </div>
             <p style="font-size:0.84rem;">Dodawaj własne wpisy i testuj cały system: klikaj w oznaczenia (<span class="sym-tag">*</span>, <span class="sym-tag">!</span>, <span class="sym-tag">👁</span>), przekształcaj kropki (<span class="sym-tag">•</span> ➔ <span class="sym-tag">X</span> ➔ <span class="sym-tag">&gt;</span> ➔ <span class="sym-tag">&lt;</span>) lub przekreślaj całe porzucone linie:</p>
 
