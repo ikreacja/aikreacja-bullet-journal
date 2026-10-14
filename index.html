@@ -1,0 +1,1770 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Metoda Bullet Journal - interaktywny przewodnik</title>
+    <meta name="description" content="Darmowy, interaktywny kurs metody Bullet Journal. Nauczysz się prowadzić notatki odręczne i porządkować zadania w zeszycie - krok po kroku, z ćwiczeniami.">
+    <meta name="author" content="Irek Krajewski, aikreacja.pl">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Metoda Bullet Journal - interaktywny przewodnik">
+    <meta property="og:description" content="Darmowy kurs do przeklikania: punktory, logi, migracja zadań i piaskownica do ćwiczeń. Przygotował aikreacja.pl.">
+    <meta property="og:locale" content="pl_PL">
+    <meta name="theme-color" content="#222930">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+    <!-- Google Fonts: Lora (Teoria), Caveat i Patrick Hand (Pismo odręczne i szkice), Courier Prime (Detale) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Courier+Prime:wght@400;700&family=Lora:ital,wght@0,400;0,600;0,700;1,400&family=Patrick+Hand&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --desk-bg: #222930;
+            --cover-color: #1a1c20;
+            --paper-bg: #FAF8F5;
+            --dot-color: #cbc7be;
+            --ink-primary: #222222;
+            --ink-blue: #1e3a8a;
+            --ink-red: #b91c1c;
+            --ink-green: #15803d;
+            --ink-muted: #78756e;
+            --highlight: #fef08a;
+            --ribbon-red: #991b1b;
+            --ribbon-gold: #b45309;
+            --ribbon-blue: #1e40af;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: var(--desk-bg);
+            background-image: radial-gradient(circle at center, #2e3842 0%, #181d22 100%);
+            font-family: 'Lora', serif;
+            color: var(--ink-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+        }
+
+        /* GÓRNY PASEK I ZAKŁADKI (WSTĄŻKI) */
+        .top-bar {
+            width: 95%;
+            max-width: 1260px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: -4px;
+            z-index: 10;
+            padding: 0 20px;
+        }
+
+        .ribbons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .ribbon-tab {
+            padding: 8px 16px 12px;
+            color: #fff;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.82rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px 6px 0 0;
+            cursor: pointer;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+
+        .ribbon-tab:hover {
+            transform: translateY(-4px);
+        }
+
+        .ribbon-index { background-color: var(--ribbon-red); }
+        .ribbon-key { background-color: var(--ribbon-gold); }
+        .ribbon-guide { background-color: #374151; }
+        .ribbon-sandbox { background-color: var(--ribbon-blue); }
+
+        .progress-container {
+            color: #e5e7eb;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.85rem;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .progress-bar-bg {
+            width: 140px;
+            height: 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: #10b981;
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        /* OKŁADKA I ROZKŁADÓWKA NOTATNIKA */
+        .notebook-cover {
+            width: 95%;
+            max-width: 1260px;
+            height: 83vh;
+            min-height: 640px;
+            max-height: 860px;
+            background-color: var(--cover-color);
+            border-radius: 14px;
+            padding: 14px;
+            box-shadow: 0 25px 60px rgba(0,0,0,0.7), 0 0 0 2px #333;
+            display: flex;
+            position: relative;
+        }
+
+        .notebook-spread {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            background-color: var(--paper-bg);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        /* Pojedyncza strona (Lewa i Prawa) */
+        .page {
+            flex: 1;
+            height: 100%;
+            padding: 28px 38px 50px 38px;
+            position: relative;
+            overflow-y: auto;
+            background-color: var(--paper-bg);
+            background-image: radial-gradient(var(--dot-color) 1.35px, transparent 1.35px);
+            background-size: 22px 22px;
+            background-position: 0 0;
+        }
+
+        .page-left {
+            border-right: 1px solid #dcd8ce;
+            box-shadow: inset -28px 0 36px -18px rgba(0,0,0,0.18);
+        }
+
+        .page-right {
+            box-shadow: inset 28px 0 36px -18px rgba(0,0,0,0.18);
+        }
+
+        /* Numeracja stron w rogach */
+        .page-number {
+            position: absolute;
+            bottom: 14px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.35rem;
+            color: var(--ink-muted);
+            font-weight: bold;
+        }
+        .page-left .page-number { left: 26px; }
+        .page-right .page-number { right: 26px; }
+
+        /* TYPOGRAFIA I ELEMENTY TEORII */
+        .module-badge {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.73rem;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--ink-muted);
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        h1, h2 {
+            font-family: 'Lora', serif;
+            color: var(--ink-primary);
+            margin-top: 0;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--ink-primary);
+            padding-bottom: 6px;
+            font-size: 1.38rem;
+        }
+
+        h3 {
+            font-size: 1.05rem;
+            margin: 14px 0 6px 0;
+            color: var(--ink-primary);
+        }
+
+        p, li {
+            line-height: 1.58;
+            font-size: 0.93rem;
+            margin: 8px 0;
+        }
+
+        /* Pudełka w stylu ramki z Quick Reference Guide (Boxed Headers) */
+        .sketch-header-box {
+            display: inline-block;
+            border: 2px solid var(--ink-primary);
+            padding: 3px 12px;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.15rem;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            background: #fff;
+            box-shadow: 2px 2px 0 var(--ink-primary);
+            margin: 8px 0;
+        }
+
+        .pro-tip-box {
+            background: rgba(254, 240, 138, 0.35);
+            border-left: 4px solid var(--ribbon-gold);
+            padding: 8px 12px;
+            margin: 10px 0;
+            font-size: 0.88rem;
+            border-radius: 0 6px 6px 0;
+        }
+
+        .pro-tip-box strong {
+            font-family: 'Courier Prime', monospace;
+            text-decoration: underline;
+            color: #78350f;
+        }
+
+        .bujo-quote {
+            border-left: 3px solid var(--ink-primary);
+            padding-left: 14px;
+            margin: 12px 0;
+            font-style: italic;
+            color: #444;
+            background: rgba(0,0,0,0.02);
+            padding-top: 5px;
+            padding-bottom: 5px;
+        }
+
+        .sym-tag {
+            font-family: 'Courier Prime', monospace;
+            background: #e7e3d8;
+            padding: 1px 6px;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        /* WYCINEK PRZYKŁADOWEJ KARTKI (PISMO ODRĘCZNE) */
+        .handwritten-card {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.32rem;
+            line-height: 1.45;
+            color: var(--ink-blue);
+            background: #fffdf9;
+            border: 1.5px solid #333;
+            border-radius: 4px;
+            padding: 12px 18px;
+            margin: 12px 0;
+            box-shadow: 3px 3px 0 rgba(0,0,0,0.12);
+            position: relative;
+        }
+
+        .handwritten-card .card-label {
+            position: absolute;
+            top: -11px;
+            right: 12px;
+            background: var(--ink-primary);
+            color: #fff;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.68rem;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .handwritten {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.38rem;
+            color: var(--ink-blue);
+        }
+
+        /* RYSUNKOWE DIAGRAMY ROZKŁADÓWEK (JAK W TINY RAY OF SUNSHINE) */
+        .mini-spread-diagram {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            border: 2px solid #222;
+            background: #fff;
+            box-shadow: 4px 4px 0 rgba(0,0,0,0.18);
+            margin: 12px 0;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.15rem;
+            color: #222;
+            min-height: 155px;
+        }
+        .mini-spread-page {
+            padding: 10px 14px;
+            position: relative;
+            background-image: radial-gradient(#e0ddd5 1px, transparent 1px);
+            background-size: 12px 12px;
+        }
+        .mini-spread-page:first-child {
+            border-right: 2px solid #222;
+        }
+        .mini-spread-title {
+            border-bottom: 1.5px solid #222;
+            font-weight: bold;
+            letter-spacing: 1px;
+            margin-bottom: 6px;
+            padding-bottom: 2px;
+            display: flex;
+            justify-content: space-between;
+        }
+        .mini-page-num {
+            position: absolute;
+            bottom: 4px;
+            font-size: 0.9rem;
+            color: #666;
+        }
+        .mini-page-num.left { left: 8px; }
+        .mini-page-num.right { right: 8px; }
+
+        /* REALISTYCZNE PRZEKREŚLENIE CAŁEJ LINII ZADANIA (STRIKE OUT) */
+        .struck {
+            text-decoration: line-through;
+            text-decoration-thickness: 2.5px;
+            text-decoration-color: var(--ink-red);
+            color: var(--ink-muted) !important;
+            opacity: 0.72;
+        }
+
+        .bujo-item.row-struck .bujo-text,
+        .bujo-item.row-struck .bullet-btn {
+            text-decoration: line-through;
+            text-decoration-thickness: 2.5px;
+            text-decoration-color: var(--ink-red);
+            color: var(--ink-muted) !important;
+            opacity: 0.75;
+        }
+
+        /* TABELA ANALOG VS DIGITAL */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+            font-size: 0.85rem;
+        }
+        .comp-box {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1.5px solid #333;
+            background: #fff;
+        }
+        .comp-box strong {
+            display: block;
+            margin-bottom: 4px;
+            font-size: 0.9rem;
+        }
+
+        /* ELEMENTY INTERAKTYWNE NA PRAWEJ STRONIE */
+        .workshop-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px dashed #b8b3a8;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        .workshop-title {
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.92rem;
+            font-weight: bold;
+            color: var(--ink-primary);
+            margin: 0;
+            border: none;
+            padding: 0;
+        }
+
+        .stamp-completed {
+            display: inline-block;
+            border: 2px solid var(--ink-green);
+            color: var(--ink-green);
+            font-family: 'Courier Prime', monospace;
+            font-weight: bold;
+            font-size: 0.72rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            transform: rotate(-4deg);
+            text-transform: uppercase;
+            background: rgba(21, 128, 61, 0.08);
+        }
+
+        /* INTERAKTYWNE PUNKTORY (BULLETS) */
+        .bujo-list {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0;
+        }
+
+        .bujo-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 10px;
+            margin-bottom: 6px;
+            border-radius: 6px;
+            transition: background 0.15s;
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.38rem;
+            color: var(--ink-blue);
+        }
+
+        .bujo-item:hover {
+            background: rgba(0,0,0,0.04);
+        }
+
+        .signifier-btn {
+            width: 30px;
+            height: 30px;
+            border: 1px dashed #aaa;
+            background: #fff;
+            border-radius: 4px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.05rem;
+            font-weight: bold;
+            color: var(--ink-red);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bullet-btn {
+            width: 32px;
+            height: 32px;
+            border: 2px solid var(--ink-primary);
+            background: #fff;
+            border-radius: 6px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 1.15rem;
+            font-weight: bold;
+            color: var(--ink-primary);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.1s, background 0.2s;
+            user-select: none;
+            flex-shrink: 0;
+        }
+
+        .bullet-btn:hover {
+            background: var(--highlight);
+            transform: scale(1.08);
+        }
+
+        .strike-btn {
+            margin-left: auto;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.72rem;
+            padding: 4px 8px;
+            border: 1px solid #aaa;
+            background: #fff;
+            border-radius: 4px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .strike-btn:hover { background: #fee2e2; border-color: var(--ink-red); }
+
+        /* PRZYCISKI AKCJI W ĆWICZENIACH */
+        .btn-action {
+            background-color: var(--ink-primary);
+            color: var(--paper-bg);
+            border: none;
+            padding: 8px 16px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.84rem;
+            font-weight: bold;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.2s;
+        }
+        .btn-action:hover { opacity: 0.85; }
+        .btn-outline {
+            background: #fff;
+            color: var(--ink-primary);
+            border: 1.5px solid var(--ink-primary);
+            padding: 5px 10px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.78rem;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 3px 4px 3px 0;
+        }
+        .btn-outline:hover, .btn-outline.selected {
+            background: var(--ink-primary);
+            color: #fff;
+        }
+
+        input[type="text"], select {
+            font-family: 'Patrick Hand', cursive;
+            font-size: 1.3rem;
+            padding: 4px 10px;
+            border: none;
+            border-bottom: 2px solid var(--ink-primary);
+            background: rgba(255,255,255,0.7);
+            color: var(--ink-blue);
+            outline: none;
+        }
+
+        /* NAWIGACJA DOLNA */
+        .bottom-nav {
+            width: 95%;
+            max-width: 1260px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 10px;
+            color: #fff;
+        }
+
+        .nav-btn {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.3);
+            padding: 9px 20px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.88rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .nav-btn:hover:not(:disabled) {
+            background: rgba(255,255,255,0.25);
+        }
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* MODAL KLUCZA SYMBOLI I PLANSZY QUICK REFERENCE */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .modal-overlay.active { display: flex; }
+        .modal-card {
+            background: var(--paper-bg);
+            background-image: radial-gradient(var(--dot-color) 1.35px, transparent 1.35px);
+            background-size: 22px 22px;
+            width: 95%;
+            max-width: 680px;
+            max-height: 90vh;
+            overflow-y: auto;
+            border-radius: 8px;
+            padding: 24px 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            border-left: 8px solid var(--ribbon-gold);
+            position: relative;
+        }
+
+
+        /* ZAKŁADKA "O AUTORZE" (aikreacja.pl) */
+        .author-tab {
+            position: fixed;
+            right: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            writing-mode: vertical-rl;
+            padding: 16px 9px;
+            background: var(--ribbon-gold);
+            color: #fff;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.82rem;
+            font-weight: bold;
+            letter-spacing: 0.06em;
+            border: none;
+            border-radius: 6px 0 0 6px;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.35);
+            cursor: pointer;
+            z-index: 900;
+            transition: padding-right 0.2s;
+        }
+        .author-tab:hover { padding-right: 14px; }
+        .author-panel {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: min(360px, 100%);
+            background: var(--paper-bg);
+            background-image: radial-gradient(var(--dot-color) 1px, transparent 1px);
+            background-size: 20px 20px;
+            box-shadow: -10px 0 40px rgba(0,0,0,0.5);
+            border-left: 8px solid var(--ribbon-gold);
+            padding: 28px 24px;
+            overflow-y: auto;
+            transform: translateX(105%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+        .author-panel.active { transform: translateX(0); }
+        .author-panel h2 { font-family: 'Caveat', cursive; font-size: 2.1rem; margin: 0 0 4px; color: var(--ink-blue); }
+        .author-panel .author-role { font-family: 'Courier Prime', monospace; font-size: 0.8rem; color: var(--ink-muted); margin: 0 0 18px; }
+        .author-panel p { font-size: 0.95rem; line-height: 1.6; margin: 0 0 14px; }
+        .author-panel .author-cta {
+            display: block;
+            text-align: center;
+            background: var(--ink-primary);
+            color: #fff;
+            text-decoration: none;
+            font-family: 'Courier Prime', monospace;
+            font-weight: bold;
+            padding: 12px 16px;
+            border-radius: 6px;
+            margin: 20px 0 10px;
+        }
+        .author-panel .author-cta:hover { background: var(--ink-blue); }
+        .author-panel .author-link { color: var(--ink-blue); }
+        .author-panel .author-note { font-size: 0.78rem; color: var(--ink-muted); border-top: 1px dashed #ccc; padding-top: 12px; margin-top: 20px; }
+        .author-close {
+            position: absolute; top: 10px; right: 14px;
+            background: none; border: none; font-size: 1.6rem; cursor: pointer; color: var(--ink-muted);
+        }
+        .made-by {
+            margin: 14px 0 22px;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.82rem;
+            color: #cbd5e1;
+            text-align: center;
+        }
+        .made-by a { color: #fde68a; }
+        @media (max-width: 940px) {
+            .author-tab { top: auto; bottom: 90px; transform: none; }
+        }
+
+        /* RESPONSYWNOŚĆ */
+        @media (max-width: 940px) {
+            .notebook-cover { height: auto; min-height: 85vh; }
+            .notebook-spread { flex-direction: column; }
+            .page-left { border-right: none; border-bottom: 2px dashed #ccc; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Górne zakładki i pasek postępu -->
+    <div class="top-bar">
+        <div class="ribbons">
+            <button class="ribbon-tab ribbon-index" onclick="goToSpread(1)" title="Przejdź do Spisu Treści">🔖 Indeks (str. 1-2)</button>
+            <button class="ribbon-tab ribbon-key" onclick="toggleKeyModal()" title="Ściągawka ze wszystkich symboli BuJo">🔑 Klucz Symboli</button>
+            <button class="ribbon-tab ribbon-guide" onclick="toggleGuideModal()" title="Wizualna ściągawka Quick Reference Guide">🗺️ Schemat 4 Kroków</button>
+            <button class="ribbon-tab ribbon-sandbox" onclick="goToSpread(11)" title="Otwórz wolną kartkę do testów">✏️ Piaskownica BuJo</button>
+        </div>
+        <div class="progress-container">
+            <span>Ukończone lekcje: <strong id="progress-text">0 / 10</strong></span>
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progress-fill"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Główny Notatnik (Rozkładówka: Lewa i Prawa strona) -->
+    <div class="notebook-cover">
+        <div class="notebook-spread">
+            <!-- Lewa strona: Teoria i przykłady graficzne -->
+            <div class="page page-left" id="left-page"></div>
+            <!-- Prawa strona: Interaktywny warsztat -->
+            <div class="page page-right" id="right-page"></div>
+        </div>
+    </div>
+
+    <!-- Nawigacja pod notatnikiem -->
+    <div class="bottom-nav">
+        <button class="nav-btn" id="btn-prev" onclick="changeSpread(-1)">← Poprzednia rozkładówka</button>
+        <span id="spread-indicator" style="font-family: 'Courier Prime', monospace; font-size: 0.9rem;">Rozkładówka 0 z 11</span>
+        <button class="nav-btn" id="btn-next" onclick="changeSpread(1)">Następna rozkładówka →</button>
+    </div>
+
+
+    <!-- Stopka i zakładka "O autorze" (aikreacja.pl) -->
+    <p class="made-by">Darmowy przewodnik od <a href="https://aikreacja.pl/?utm_source=bullet-journal&utm_medium=app&utm_campaign=mini-apki" target="_blank" rel="noopener">aikreacja.pl</a> - więcej prostych narzędzi i promptów do pracy</p>
+
+    <button class="author-tab" onclick="toggleAuthorPanel()" aria-controls="author-panel" aria-expanded="false" title="Kto przygotował ten przewodnik">O autorze</button>
+    <aside class="author-panel" id="author-panel" aria-label="O autorze">
+        <button class="author-close" onclick="toggleAuthorPanel()" aria-label="Zamknij">&times;</button>
+        <h2>Irek Krajewski</h2>
+        <p class="author-role">iKreacja / aikreacja.pl</p>
+        <p>Na co dzień pracuję z narzędziami AI. Buduję z nimi oferty, treści, strony i procesy dla małych firm.</p>
+        <p>Na aikreacja.pl zbieram prompty, checklisty i mini aplikacje, które realnie działają u mnie w pracy. Wszystko za darmo i po polsku.</p>
+        <p>Ten przewodnik to jedna z takich mini aplikacji. Notatki odręczne i AI dobrze się uzupełniają: zeszyt porządkuje głowę, AI robi resztę.</p>
+        <a class="author-cta" href="https://aikreacja.pl/?utm_source=bullet-journal&utm_medium=app&utm_campaign=mini-apki" target="_blank" rel="noopener">Zobacz bibliotekę aikreacja.pl</a>
+        <p style="text-align:center; margin:0;"><a class="author-link" href="https://ikreacja.pl/bio" target="_blank" rel="noopener">Więcej o mnie</a></p>
+        <p class="author-note">Nieoficjalny przewodnik oparty na książce "Metoda Bullet Journal" Rydera Carrolla. Nie jest powiązany z autorem ani z marką Bullet Journal.</p>
+    </aside>
+
+    <!-- Modal 1: Klucz Symboli (Ściągawka) -->
+    <div class="modal-overlay" id="key-modal" onclick="if(event.target===this) toggleKeyModal()">
+        <div class="modal-card">
+            <div class="sketch-header-box">BULLETS AND SIGNIFIERS (KLUCZ)</div>
+            <p>W metodzie Rydera Carrolla (oraz na planszy <em>Tiny Ray of Sunshine</em>) używamy krótkich notacji podzielonych na <strong>Punktory (Bullets)</strong> i <strong>Oznaczenia (Signifiers)</strong>:</p>
+            <div class="handwritten-card" style="font-size: 1.32rem;">
+                <div><strong>• &nbsp; Zadanie (Task Bullet)</strong> – rzecz, którą musisz zrobić</div>
+                <div><strong>X &nbsp; Zadanie wykonane (Completed)</strong> – przekreślamy samą kropkę na X</div>
+                <div><strong>&gt; &nbsp; Zadanie zmigrowane (Migrated)</strong> – przepisane do nowego Monthly Log lub kolekcji</div>
+                <div><strong>&lt; &nbsp; Zadanie zaplanowane (Scheduled)</strong> – przeniesione do Future Log (na przyszłość)</div>
+                <div><span class="struck"><strong>• &nbsp; Zadanie nieaktualne (Irrelevant)</strong></span> – przekreślamy całą linię wraz z tekstem!</div>
+                <hr style="border:none; border-top:1px dashed #ccc; margin:8px 0;">
+                <div><strong>O &nbsp; Wydarzenie (Event Bullet)</strong> – spotkanie, rocznica, doświadczenie</div>
+                <div><strong>– &nbsp; Notatka (Note Bullet)</strong> – fakt, myśl, obserwacja do zapamiętania</div>
+                <hr style="border:none; border-top:1px dashed #ccc; margin:8px 0;">
+                <div><strong>* &nbsp; Priorytet (Priority Signifier)</strong> – gwiazdka na marginesie po lewej stronie</div>
+                <div><strong>! &nbsp; Inspiracja (Inspiration Signifier)</strong> – wykrzyknik obok genialnej myśli</div>
+                <div><strong>👁 &nbsp; Do zbadania (Explore Signifier)</strong> – symbol oka przy tematach wymagających researchu</div>
+            </div>
+            <div style="text-align: right; margin-top: 12px;">
+                <button class="btn-action" onclick="toggleKeyModal()">Zamknij ściągawkę</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal 2: Schemat 4 Kroków (Quick Reference Guide - Tiny Ray of Sunshine) -->
+    <div class="modal-overlay" id="guide-modal" onclick="if(event.target===this) toggleGuideModal()">
+        <div class="modal-card" style="max-width: 820px;">
+            <div class="sketch-header-box">BULLET⚡JOURNAL QUICK REFERENCE GUIDE</div>
+            <p style="font-size:0.86rem;">Wizualne podsumowanie 4 filarów systemu na podstawie oficjalnego przewodnika Kim Alvarez (<em>Tiny Ray of Sunshine</em>):</p>
+            
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+                <div class="comp-box">
+                    <div class="sketch-header-box" style="font-size:0.95rem;">STEP 1: INDEX</div>
+                    <p style="font-size:0.82rem;">Przeznacz pierwsze 4 strony na Indeks. Gdy dodajesz nową kolekcję, wpisz jej temat i numery stron. <strong>Pro Tip:</strong> Indeksuj tylko to, do czego będziesz wracać później.</p>
+                </div>
+                <div class="comp-box">
+                    <div class="sketch-header-box" style="font-size:0.95rem;">STEP 2: FUTURE LOG</div>
+                    <p style="font-size:0.82rem;">Kolejne 4 strony podziel na miesiące. Zapisuj tu wydarzenia i zadania, które przypadają poza bieżącym miesiącem. Zaglądaj tu co miesiąc, tworząc nowy Monthly Log.</p>
+                </div>
+                <div class="comp-box">
+                    <div class="sketch-header-box" style="font-size:0.95rem;">STEP 3: MONTHLY LOG</div>
+                    <p style="font-size:0.82rem;">Lewa strona: Oś dni miesiąca na wydarzenia i wspomnienia (<em>Notable Snippets</em>). Prawa strona: Lista zadań na dany miesiąc oraz zadania zmigrowane z poprzedniego.</p>
+                </div>
+                <div class="comp-box">
+                    <div class="sketch-header-box" style="font-size:0.95rem;">STEP 4: DAILY LOG</div>
+                    <p style="font-size:0.82rem;">Wpisuj datę i dzień tygodnia na bieżąco. Przez cały dzień zapisuj w krótkiej formie zadania (•), wydarzenia (O) i notatki (–). Wieczorem przeglądaj wpisy!</p>
+                </div>
+            </div>
+            <div style="text-align: right; margin-top: 14px;">
+                <button class="btn-action" onclick="toggleGuideModal()">Zamknij schemat</button>
+            </div>
+        </div>
+    </div>
+
+<script>
+    // ==================== STAN APLIKACJI ====================
+    const STORAGE_KEY = 'bujo_interactive_course_v4';
+    
+    let state = {
+        currentSpread: 0,
+        userName: '',
+        completedSpreads: {},
+        trimAnswers: { 0: null, 1: null, 2: null },
+        sorterAnswers: { 0: null, 1: null, 2: null, 3: null },
+        daySimTasks: [
+            { id: 1, text: "Odpisać na maila od klienta", bullet: "•", sig: "", struck: false, hint: "Zrobione! Kliknij kropkę, aby zmienić ją na X (tekst pozostaje czytelny)" },
+            { id: 2, text: "Przygotować prezentację dla zarządu", bullet: "•", sig: "", struck: false, hint: "Super pilne! Dodaj gwiazdkę (*) po lewej stronie kropki" },
+            { id: 3, text: "Naprawić stary toster", bullet: "•", sig: "", struck: false, hint: "Nieaktualne (kupiliśmy nowy) – kliknij 'Wykreśl linię', aby przekreślić cały wiersz" },
+            { id: 4, text: "Odebrać paczkę z paczkomatu", bullet: "•", sig: "", struck: false, hint: "Przełożone na jutro – kliknij kropkę i zmigruj na (>)" },
+            { id: 5, text: "Sprawdzić ofertę wakacji w Portugalii", bullet: "•", sig: "", struck: false, hint: "Wymaga researchu – dodaj po lewej symbol Oka (👁)" }
+        ],
+        dailyLogEntries: [
+            { type: "•", text: "Kupić kawę ziarnistą" },
+            { type: "O", text: "9:00 Spotkanie zespołu" },
+            { type: "–", text: "Nowy ekspres wymaga filtrów typu Clarke" }
+        ],
+        monthlyEventAdded: false,
+        monthlyMemoryAdded: false,
+        monthlyTaskAdded: false,
+        futureMigrated: [false, false],
+        customBooks: ["Metoda Bullet Journal – R. Carroll", "Atomowe Nawyki – J. Clear"],
+        customIndexed: false,
+        migrationItems: [
+            { text: "Rozliczyć podatek PIT", decision: null }, // 'migrate' (>), 'schedule' (<) lub 'strike' (wykreślenie linii)
+            { text: "Nauczyć się języka klingońskiego", decision: null },
+            { text: "Odnowić paszport w przyszłym półroczu", decision: null },
+            { text: "Obejrzeć serial, który przestał mnie ciekawić", decision: null }
+        ],
+        reflectionChecks: [false, false, false],
+        intentionText: "",
+        sandboxItems: [
+            { sig: "*", bullet: "•", text: "Kliknij w kropkę lub przycisk 'Wykreśl linię', aby zobaczyć różnicę!", struck: false },
+            { sig: "👁", bullet: "•", text: "Przetestować metodę Alastaira w Future Logu", struck: false },
+            { sig: "!", bullet: "–", text: "Migracja to różnica między byciem zajętym a produktywnym", struck: false }
+        ]
+    };
+
+    function loadState() {
+        try {
+            const saved = localStorage.getItem(STORAGE_KEY);
+            if (saved) {
+                const parsed = JSON.parse(saved);
+                state = { ...state, ...parsed };
+            }
+        } catch (e) { console.error(e); }
+    }
+
+    function saveState() {
+        try {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+        } catch (e) { console.error(e); }
+        updateProgressUI();
+    }
+
+    // ==================== DEFINICJA WSZYSTKICH 12 ROZKŁADÓWEK ====================
+    const spreadsMeta = [
+        { id: 0, title: "Okładka i 4 Filary Metody", pages: "i - ii", indexable: false },
+        { id: 1, title: "Krok 1: Indeks (Spis Treści)", pages: "1 - 2", indexable: false },
+        { id: 2, title: "Dlaczego Analog? + Zadania (•)", pages: "3 - 4", indexable: true },
+        { id: 3, title: "Wydarzenia (O) oraz Notatki (–)", pages: "5 - 6", indexable: true },
+        { id: 4, title: "Życie Kropki, Wykreślanie i Oznaczenia (*, !, 👁)", pages: "7 - 8", indexable: true },
+        { id: 5, title: "Krok 4: Daily Log i Wcięcia (Nesting)", pages: "9 - 10", indexable: true },
+        { id: 6, title: "Krok 3: Monthly Log i Kronika Wspomnień", pages: "11 - 12", indexable: true },
+        { id: 7, title: "Krok 2: Future Log i Metoda Alastaira", pages: "13 - 14", indexable: true },
+        { id: 8, title: "Kolekcje Niestandardowe i Nawlekanie", pages: "15 - 16", indexable: true },
+        { id: 9, title: "Sztuka Migracji (>, < oraz Przekreślanie linii)", pages: "17 - 18", indexable: true },
+        { id: 10, title: "Refleksja (AM/PM) i Zasada 5x Dlaczego", pages: "19 - 20", indexable: true },
+        { id: 11, title: "Piaskownica BuJo (Twój własny arkusz)", pages: "21 - 22", indexable: true }
+    ];
+
+    function renderCurrentSpread() {
+        const leftEl = document.getElementById('left-page');
+        const rightEl = document.getElementById('right-page');
+        const s = state.currentSpread;
+
+        document.getElementById('btn-prev').disabled = (s === 0);
+        document.getElementById('btn-next').disabled = (s === spreadsMeta.length - 1);
+        document.getElementById('spread-indicator').textContent = `Rozkładówka ${s} z ${spreadsMeta.length - 1} (Strony ${spreadsMeta[s].pages})`;
+
+        switch (s) {
+            case 0: renderSpread0(leftEl, rightEl); break;
+            case 1: renderSpread1(leftEl, rightEl); break;
+            case 2: renderSpread2(leftEl, rightEl); break;
+            case 3: renderSpread3(leftEl, rightEl); break;
+            case 4: renderSpread4(leftEl, rightEl); break;
+            case 5: renderSpread5(leftEl, rightEl); break;
+            case 6: renderSpread6(leftEl, rightEl); break;
+            case 7: renderSpread7(leftEl, rightEl); break;
+            case 8: renderSpread8(leftEl, rightEl); break;
+            case 9: renderSpread9(leftEl, rightEl); break;
+            case 10: renderSpread10(leftEl, rightEl); break;
+            case 11: renderSpread11(leftEl, rightEl); break;
+        }
+        updateProgressUI();
+    }
+
+    // -------------------- ROZKŁADÓWKA 0: OKŁADKA I WPROWADZENIE --------------------
+    function renderSpread0(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Wprowadzenie • Ryder Carroll & Tiny Ray of Sunshine</span>
+            <div class="sketch-header-box">BULLET⚡JOURNAL METHOD</div>
+            <div class="bujo-quote">
+                „Dla twórców list, zbieraczy post-itów i notujących marzycieli. To analogowy system w cyfrowej erze, który pomoże Ci <strong>śledzić przeszłość, porządkować teraźniejszość i planować przyszłość</strong>.” – Ryder Carroll
+            </div>
+            <p>Według oficjalnego przewodnika <em>Thorough Guide to the Bullet Journal System</em> (Kim Alvarez), cała metoda opiera się na <strong>4 prostych filarach</strong>:</p>
+            <ol>
+                <li><strong>Indeksowanie (Indexing):</strong> Numerujesz strony i dopisujesz tematy do Spisu Treści na początku zeszytu.</li>
+                <li><strong>Kolekcje (Collections):</strong> Modułowe szablony (<em>Future Log, Monthly Log, Daily Log</em> oraz listy własne). Z definicji każda strona z tematem w BuJo jest Kolekcją!</li>
+                <li><strong>Szybkie Notowanie (Rapid-Logging):</strong> Obiektywny, skrócony zapis za pomocą Punktorów (•, O, –) i Oznaczeń (*, !, 👁).</li>
+                <li><strong>Migracja (Migration):</strong> Comiesięczny przegląd, w którym odsiewasz szum (wykreślasz nieistotne linie) i ręcznie przepisujesz tylko wartościowe zadania.</li>
+            </ol>
+            <span class="page-number">i</span>
+        `;
+
+        right.innerHTML = `
+            <div style="display:flex; flex-direction:column; justify-content:center; height:90%; text-align:center; padding: 15px;">
+                <div class="handwritten-card" style="padding: 26px 20px; border: 2px solid var(--ink-primary);">
+                    <div class="sketch-header-box" style="margin-bottom:10px;">QUICK REFERENCE NOTEBOOK</div>
+                    <h2 style="border:none; font-size:1.6rem; margin:8px 0;">Ten notatnik należy do:</h2>
+                    <input type="text" id="owner-input" placeholder="Wpisz swoje imię..." value="${state.userName}" 
+                        oninput="state.userName = this.value; saveState();" style="text-align:center; width:80%; font-size:1.6rem;">
+                    <p style="font-family:'Lora', serif; font-size:0.88rem; color:#444; margin-top:16px;">
+                        W tym kursie po lewej stronie zobaczysz <strong>rysunkowe makiety rozkładówek</strong> (wzorowane na <em>Quick Reference Guide</em>), a po prawej przetestujesz działanie każdego symbolu i wykreślania.
+                    </p>
+                    <button class="btn-action" style="margin-top:12px; font-size:0.95rem; padding:10px 22px;" onclick="changeSpread(1)">
+                        Otwórz Krok 1: Indeks →
+                    </button>
+                </div>
+            </div>
+            <span class="page-number">ii</span>
+        `;
+    }
+
+    // -------------------- ROZKŁADÓWKA 1: INDEKS (SPIS TREŚCI) --------------------
+    function renderSpread1(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Pierwsza Kolekcja • Strony 1–4</span>
+            <div class="sketch-header-box">STEP 1: INDEX (SPIS TREŚCI)</div>
+            <p>Indeks to geniusz metody Bullet Journal. Przeznaczasz na niego <strong>pierwsze 2–4 strony notatnika</strong>. Aby działał, musisz numerować kolejne kartki zeszytu.</p>
+            
+            <!-- Rysunkowy diagram rozkładówki Indeksu jak w Tiny Ray of Sunshine -->
+            <div class="mini-spread-diagram">
+                <div class="mini-spread-page">
+                    <div class="mini-spread-title"><span>INDEX</span></div>
+                    <div>Future Log: 1–4</div>
+                    <div>Październik: 5–10</div>
+                    <div>Spotkania (Meetings): 7, 11–12</div>
+                    <div>Książki: 15</div>
+                    <div>Październik (cd.): 16–22</div>
+                    <span class="mini-page-num left">i</span>
+                </div>
+                <div class="mini-spread-page">
+                    <div class="mini-spread-title"><span>INDEX</span></div>
+                    <div style="color:#888; font-size:1rem; margin-top:20px;">(Kolejna wolna kolumna na przyszłe miesiące i projekty...)</div>
+                    <span class="mini-page-num right">ii</span>
+                </div>
+            </div>
+
+            <div class="pro-tip-box">
+                <strong>PRO TIP (z przewodnika):</strong> Indeksuj <em>tylko te kolekcje, do których będziesz wracać w przyszłości</em>! Nie wpisuj do Indeksu każdego pojedynczego Dziennika Codziennego (Daily Log) – wystarczy zaindeksować początek danego miesiąca.
+            </div>
+            <span class="page-number">1</span>
+        `;
+
+        let listHtml = spreadsMeta.filter(m => m.indexable).map(m => {
+            const done = state.completedSpreads[m.id];
+            return `
+                <li onclick="goToSpread(${m.id})" style="display:flex; justify-content:space-between; align-items:center; padding:6px 10px; border-bottom:1px dotted #ccc; cursor:pointer;">
+                    <span class="handwritten" style="font-size:1.28rem; color:${done ? 'var(--ink-blue)' : '#555'};">
+                        ${done ? '✓ ' : '• '} ${m.title}
+                    </span>
+                    <span class="handwritten" style="font-size:1.28rem; font-weight:bold; color:${done ? 'var(--ink-green)' : 'var(--ink-muted)'};">
+                        ${done ? 'str. ' + m.pages : '(otwórz)'}
+                    </span>
+                </li>
+            `;
+        }).join('');
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">🧭 INTERAKTYWNY INDEKS KURSU</h3>
+                <span style="font-size:0.8rem; color:var(--ink-muted);">Notes: <strong>${state.userName || 'Czytelnik'}</strong></span>
+            </div>
+            <p style="font-size:0.86rem;">Ukończenie ćwiczenia na danej rozkładówce <strong>automatycznie dopisuje jej numery stron</strong> do tego Indeksu. Kliknij dowolny temat, aby przejść bezpośrednio do wybranej strony:</p>
+            <ul style="list-style:none; padding:0; margin-top:8px;">
+                ${listHtml}
+            </ul>
+            <span class="page-number">2</span>
+        `;
+    }
+
+    // -------------------- ROZKŁADÓWKA 2: ANALOG VS CYFROWY & ZADANIA (•) --------------------
+    function renderSpread2(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł I • Szybkie Notowanie (Rapid Logging)</span>
+            <div class="sketch-header-box">RAPID LOGGING & TASK BULLET (•)</div>
+            <p>Dlaczego w erze smartfonów wracamy do papieru i długopisu? Ryder Carroll wskazuje na przewagę poznawczą odręcznego pisania:</p>
+            <div class="comparison-grid">
+                <div class="comp-box">
+                    <strong>📱 Notatki cyfrowe</strong>
+                    Bezmyślne wklejanie setek zadań, ciągłe powiadomienia i zerowy koszt dodawania nieistotnych rzeczy.
+                </div>
+                <div class="comp-box">
+                    <strong>✍️ Pismo odręczne (BuJo)</strong>
+                    Aktywuje w mózgu <em>układ siatkowaty (RAS)</em>, wymusza skupienie i syntezę myśli przed postawieniem słów na papierze.
+                </div>
+            </div>
+            <p><strong>Rapid Logging</strong> to obiektywny, skrócony zapis. Nie piszemy wypracowań – zapisujemy samą esencję działania poprzedzoną <strong>Kropką <span class="sym-tag">•</span> (Task Bullet)</strong>.</p>
+            <div class="handwritten-card">
+                <span class="card-label">Przykład z przewodnika</span>
+                <div class="struck" style="font-size:1.15rem;">• Muszę pamiętać, żeby umyć samochód i wyczyścić rynny przed deszczem</div>
+                <div>• Umyć samochód (Wash car)</div>
+                <div>• Wyczyścić rynnę (Clear gutter)</div>
+                <div>• Matematyka: rozdz. 5, zad. 62–90 (nieparzyste)</div>
+            </div>
+            <span class="page-number">3</span>
+        `;
+
+        const exercises = [
+            {
+                raw: "„Muszę koniecznie kupić karmę dla psa oraz przy okazji odebrać garnitur z pralni przed weekendem.”",
+                options: [
+                    { text: "• Pamiętać o karmie dla psa i pralni przed sobotą", correct: false },
+                    { text: "• Kupić karmę dla psa  /  • Odebrać garnitur z pralni", correct: true }
+                ]
+            },
+            {
+                raw: "„Zrobić przelew za rachunek za prąd w wysokości 240 zł zanim minie termin 10-go dnia miesiąca.”",
+                options: [
+                    { text: "• Opłacić prąd (240 zł do 10-go)", correct: true },
+                    { text: "• Muszę przelać pieniądze za rachunek za prąd 240 zł", correct: false }
+                ]
+            },
+            {
+                raw: "„Porozmawiać z szefem o podwyżce podczas czwartkowego spotkania.”",
+                options: [
+                    { text: "• Poprosić o podwyżkę (Ask for a raise - czw.)", correct: true },
+                    { text: "• Zastanowić się jak porozmawiać z szefem o pieniądzach", correct: false }
+                ]
+            }
+        ];
+
+        const allCorrect = state.trimAnswers[0] === true && state.trimAnswers[1] === true && state.trimAnswers[2] === true;
+        if (allCorrect) state.completedSpreads[2] = true;
+
+        let exHtml = exercises.map((ex, idx) => `
+            <div style="margin-bottom:12px; padding:10px; background:rgba(255,255,255,0.65); border-radius:6px; border:1px solid #ddd;">
+                <div style="font-size:0.84rem; color:#555; margin-bottom:6px;">Myśl: <em>${ex.raw}</em></div>
+                <div>
+                    ${ex.options.map((opt) => `
+                        <button class="btn-outline ${state.trimAnswers[idx] === opt.correct && state.trimAnswers[idx] !== null ? (opt.correct ? 'selected' : '') : ''}" 
+                            onclick="selectTrimAnswer(${idx}, ${opt.correct})">${opt.text}</button>
+                    `).join('')}
+                </div>
+                ${state.trimAnswers[idx] === true ? '<span style="color:var(--ink-green); font-size:0.78rem;">✓ Znakomicie! Krótka, obiektywna notacja.</span>' : ''}
+                ${state.trimAnswers[idx] === false ? '<span style="color:var(--ink-red); font-size:0.78rem;">✗ Zbyt rozwlekłe lub łączy dwie różne sprawy. Wybierz drugą opcję!</span>' : ''}
+            </div>
+        `).join('');
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">✂️ ĆWICZENIE 1: Obiektywny krótki zapis</h3>
+                ${state.completedSpreads[2] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.86rem;">Przekształć rozwlekłe myśli w zwięzłe punktory zadań (<span class="sym-tag">•</span>):</p>
+            ${exHtml}
+            <span class="page-number">4</span>
+        `;
+    }
+
+    function selectTrimAnswer(qIdx, isCorrect) {
+        state.trimAnswers[qIdx] = isCorrect;
+        saveState();
+        renderCurrentSpread();
+    }
+
+    // -------------------- ROZKŁADÓWKA 3: WYDARZENIA (O) I NOTATKI (–) --------------------
+    function renderSpread3(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł I • Trzy Kategorie Punktorów</span>
+            <div class="sketch-header-box">TASKS (•), EVENTS (O) & NOTES (–)</div>
+            <p>W Rapid Loggingu wszystko, co zapisujesz, trafia do jednej z trzech kategorii punktorów:</p>
+            <ul>
+                <li><strong><span class="sym-tag">•</span> Zadanie (Task Bullet):</strong> Wymaga od Ciebie wykonania konkretnej czynności.</li>
+                <li><strong><span class="sym-tag">O</span> Wydarzenie (Event Bullet):</strong> Otwarte kółko. Dotyczy spraw powiązanych z datą lub godziną – zarówno zaplanowanych spotkań (<em>O 14:00 Spotkanie</em>), jak i zapisanych po fakcie doświadczeń (<em>O Widziałem się z rodzicami</em>).</li>
+                <li><strong><span class="sym-tag">–</span> Notatka (Note Bullet):</strong> Krótki myślnik (kreska). Służy do zapisywania faktów, pomysłów, obserwacji i myśli, które nie wymagają działania, ale chcesz je zapamiętać.</li>
+            </ul>
+            <div class="handwritten-card">
+                <span class="card-label">Przykłady z Tiny Ray of Sunshine</span>
+                <div><strong>Wydarzenia (O):</strong> &nbsp; O Bieganie &nbsp;|&nbsp; O Spotkanie o 14:00 &nbsp;|&nbsp; O Urodziny Kasi</div>
+                <div><strong>Notatki (–):</strong> &nbsp; – Przepis na świetną kawę &nbsp;|&nbsp; – Spotkałem dawnego kolegę!</div>
+            </div>
+            <span class="page-number">5</span>
+        `;
+
+        const items = [
+            { text: "14:00 Spotkanie projektowe (Meeting at 2pm)", expected: "O" },
+            { text: "Szef polecił książkę 'Esencjalista'", expected: "–" },
+            { text: "Kupić buty do biegania (Buy shoes)", expected: "•" },
+            { text: "Odwiedziny u rodziców w sobotę (Saw parents)", expected: "O" }
+        ];
+
+        const allDone = items.every((it, idx) => state.sorterAnswers[idx] === it.expected);
+        if (allDone) state.completedSpreads[3] = true;
+
+        let rowsHtml = items.map((it, idx) => {
+            const chosen = state.sorterAnswers[idx];
+            const isOk = chosen === it.expected;
+            return `
+                <div style="display:flex; align-items:center; justify-content:space-between; background:rgba(255,255,255,0.7); padding:8px 14px; border-radius:6px; margin-bottom:8px; border:1px solid #ddd;">
+                    <div class="handwritten" style="font-size:1.35rem;">
+                        <strong style="color:var(--ink-primary); margin-right:8px;">${chosen || '?'}</strong> ${it.text}
+                    </div>
+                    <div>
+                        ${['•', 'O', '–'].map(sym => `
+                            <button class="btn-outline ${chosen === sym ? 'selected' : ''}" 
+                                onclick="setSorter(${idx}, '${sym}')" style="font-weight:bold; width:36px;">${sym}</button>
+                        `).join('')}
+                    </div>
+                </div>
+                ${chosen && !isOk ? `<div style="color:var(--ink-red); font-size:0.76rem; margin:-4px 0 8px 6px;">Podpowiedź: Czy to akcja do wykonania (•), spotkanie/doświadczenie (O), czy informacja do zapamiętania (–)?</div>` : ''}
+            `;
+        }).join('');
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">🗂️ ĆWICZENIE 2: Sortownik myśli</h3>
+                ${state.completedSpreads[3] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.86rem;">Przypisz odpowiedni punktor (<span class="sym-tag">•</span>, <span class="sym-tag">O</span> lub <span class="sym-tag">–</span>) do każdego z poniższych wpisów:</p>
+            ${rowsHtml}
+            ${allDone ? `<div class="handwritten-card" style="border-color:var(--ink-green); color:var(--ink-green);">Brawo! Twoje notatki mają teraz przejrzystą strukturę.</div>` : ''}
+            <span class="page-number">6</span>
+        `;
+    }
+
+    function setSorter(idx, sym) {
+        state.sorterAnswers[idx] = sym;
+        saveState();
+        renderCurrentSpread();
+    }
+
+    // -------------------- ROZKŁADÓWKA 4: ŻYCIE KROPKI, WYKREŚLANIE I SIGNIFIERS --------------------
+    function renderSpread4(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł I • Ewolucja Kropki, Wykreślanie i Oznaczenia</span>
+            <div class="sketch-header-box">BULLET STATES & SIGNIFIERS (* ! 👁)</div>
+            <p>W książce Rydera Carrolla bardzo ważne jest rozróżnienie między <strong>wykonaniem zadania</strong> a <strong>porzuceniem zadania</strong>:</p>
+            
+            <div class="handwritten-card" style="font-size:1.25rem;">
+                <span class="card-label">Jak oznaczamy i wykreślamy w BuJo?</span>
+                <div><strong>• &nbsp; Kupić artykuły spożywcze</strong> &nbsp; <em>(Zadanie aktywne)</em></div>
+                <div><strong>X &nbsp; Kupić artykuły spożywcze</strong> &nbsp; <em>(Wykonane – skreślamy TYLKO kropkę na X!)</em></div>
+                <div><strong>&gt; &nbsp; Odebrać pocztę</strong> &nbsp; <em>(Zmigrowane – przeniesione dalej)</em></div>
+                <div><strong>&lt; &nbsp; Wizyta u weterynarza, 16 wrz</strong> &nbsp; <em>(Zaplanowane w Future Log)</em></div>
+                <div class="struck"><strong>• &nbsp; Naprawić stary toster</strong> &nbsp; <em>(Porzucone – przekreślamy CAŁĄ LINIĘ wraz z tekstem!)</em></div>
+            </div>
+
+            <p><strong>Oznaczenia (Signifiers)</strong> dodajemy po lewej stronie kropki tylko wtedy, gdy wpis wymaga dodatkowego kontekstu na pierwszy rzut oka:</p>
+            <ul>
+                <li><strong><span class="sym-tag">*</span> Priorytet (Priority):</strong> Najważniejsze sprawy (np. <em>* • Wynieść śmieci</em>).</li>
+                <li><strong><span class="sym-tag">!</span> Inspiracja (Inspiration):</strong> Ważny pomysł lub myśl (np. <em>! – Świetny cytat</em>).</li>
+                <li><strong><span class="sym-tag">👁</span> Do zbadania (Explore):</strong> Rysunek oka – temat wymaga researchu i sprawdzenia.</li>
+            </ul>
+            <span class="page-number">7</span>
+        `;
+
+        const t = state.daySimTasks;
+        const simSuccess = (t[0].bullet === 'X') && (t[1].sig === '*') && (t[2].struck === true) && (t[3].bullet === '>') && (t[4].sig === '👁');
+        if (simSuccess) state.completedSpreads[4] = true;
+
+        let listHtml = state.daySimTasks.map((task, idx) => `
+            <li class="bujo-item ${task.struck ? 'row-struck' : ''}" style="flex-direction:column; align-items:flex-start; background:rgba(255,255,255,0.65); border:1px solid #ddd; padding:7px 12px;">
+                <div style="display:flex; align-items:center; width:100%; gap:8px;">
+                    <button class="signifier-btn" onclick="cycleSignifier(${idx})" title="Kliknij, aby zmienić Signifier (* ➔ ! ➔ 👁)">
+                        ${task.sig || '·'}
+                    </button>
+                    <button class="bullet-btn" onclick="cycleBullet(${idx})" title="Kliknij w kropkę, aby zmienić jej stan (• ➔ X ➔ > ➔ <)">
+                        ${task.bullet}
+                    </button>
+                    <span class="bujo-text ${task.struck ? 'struck' : ''}">${task.text}</span>
+                    <button class="strike-btn" onclick="toggleStrike(${idx})">${task.struck ? 'Cofnij skreślenie' : 'Wykreśl linię'}</button>
+                </div>
+                <div style="font-family:'Courier Prime', monospace; font-size:0.73rem; color:#555; margin-left:40px;">
+                    👉 Zadanie: ${task.hint}
+                </div>
+            </li>
+        `).join('');
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">⚡ ĆWICZENIE 3: Symulator Dnia i Wykreślania</h3>
+                ${state.completedSpreads[4] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.84rem;">Klikaj w pole przed kropką (<span class="sym-tag">*</span>, <span class="sym-tag">!</span>, <span class="sym-tag">👁</span>), w samą kropkę (<span class="sym-tag">•</span> ➔ <span class="sym-tag">X</span> ➔ <span class="sym-tag">&gt;</span> ➔ <span class="sym-tag">&lt;</span>) oraz w przycisk <strong>"Wykreśl linię"</strong>:</p>
+            <ul class="bujo-list">
+                ${listHtml}
+            </ul>
+            ${simSuccess ? `<div style="color:var(--ink-green); font-weight:bold; font-size:0.88rem;">🎉 Brawo! Zobacz, jak wyraźnie różni się zadanie wykonane (X) od zadania wykreślonego w całości.</div>` : ''}
+            <span class="page-number">8</span>
+        `;
+    }
+
+    function cycleBullet(idx) {
+        const order = ["•", "X", ">", "<"];
+        const curr = state.daySimTasks[idx].bullet;
+        state.daySimTasks[idx].bullet = order[(order.indexOf(curr) + 1) % order.length];
+        saveState();
+        renderCurrentSpread();
+    }
+
+    function cycleSignifier(idx) {
+        const order = ["", "*", "!", "👁"];
+        const curr = state.daySimTasks[idx].sig;
+        state.daySimTasks[idx].sig = order[(order.indexOf(curr) + 1) % order.length];
+        saveState();
+        renderCurrentSpread();
+    }
+
+    function toggleStrike(idx) {
+        state.daySimTasks[idx].struck = !state.daySimTasks[idx].struck;
+        saveState();
+        renderCurrentSpread();
+    }
+
+    // -------------------- ROZKŁADÓWKA 5: DAILY LOG --------------------
+    function renderSpread5(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł II • Codzienna Przestrzeń Robocza</span>
+            <div class="sketch-header-box">STEP 4: DAILY LOG (DZIENNIK CODZIENNY)</div>
+            <p>Daily Log to serce Twojego notatnika używane dzień po dniu. Jako nagłówek wpisujesz skrót dnia tygodnia i datę (np. <strong>MON / 6</strong>), a pod spodem na bieżąco notujesz zadania, wydarzenia i notatki.</p>
+            
+            <!-- Diagram rozkładówki Daily Log jak na obrazku Quick Reference Guide -->
+            <div class="mini-spread-diagram">
+                <div class="mini-spread-page">
+                    <div class="mini-spread-title"><span>MON / 6</span></div>
+                    <div>• Bank</div>
+                    <div>O 9A – Meeting</div>
+                    <div>– Butterfly</div>
+                    <div>X Games</div>
+                    <div class="mini-spread-title" style="margin-top:8px;"><span>TUE / 7</span></div>
+                    <div>O 9A – Work</div>
+                    <div>* X Take out trash</div>
+                    <div>👁 • Bag</div>
+                    <span class="mini-page-num left">9</span>
+                </div>
+                <div class="mini-spread-page">
+                    <div class="mini-spread-title"><span>FRI / 10</span></div>
+                    <div>O Party</div>
+                    <div>! X New phone</div>
+                    <div class="mini-spread-title" style="margin-top:8px;"><span>SAT / 11</span></div>
+                    <div>– New coffee</div>
+                    <div>X Clear desk</div>
+                    <div>X Relax ☀️</div>
+                    <span class="mini-page-num right">10</span>
+                </div>
+            </div>
+
+            <div class="pro-tip-box">
+                <strong>ZASADA Z PRZEWODNIKA:</strong> Nigdy nie przygotowuj nagłówków dni z wyprzedzeniem! Zwróć uwagę na diagramie wyżej: po wtorku (<em>TUE / 7</em>) od razu następuje piątek (<em>FRI / 10</em>). Jeśli pominiesz kilka dni, nie marnujesz ani centymetra papieru!
+            </div>
+            <span class="page-number">9</span>
+        `;
+
+        if (state.dailyLogEntries.length >= 5) state.completedSpreads[5] = true;
+
+        let entriesHtml = state.dailyLogEntries.map(e => `
+            <div class="handwritten" style="padding:2px 0;"><strong>${e.type}</strong> ${e.text}</div>
+        `).join('');
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">📅 ĆWICZENIE 4: Prowadzenie Daily Logu</h3>
+                ${state.completedSpreads[5] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.86rem;">Dopisz przynajmniej <strong>2 nowe wpisy</strong> do dzisiejszego Dziennika Codziennego (możesz użyć też podzadania z wcięciem):</p>
+            
+            <div class="handwritten-card" style="min-height:195px;">
+                <div style="border-bottom:1.5px solid #222; font-weight:bold; margin-bottom:6px;">WED / 14</div>
+                ${entriesHtml}
+            </div>
+
+            <div style="display:flex; gap:8px; align-items:center; margin-top:10px;">
+                <select id="daily-type">
+                    <option value="•">• Zadanie</option>
+                    <option value="O">O Wydarzenie</option>
+                    <option value="–">– Notatka</option>
+                    <option value="* •">* • Priorytet</option>
+                    <option value="👁 •">👁 • Do zbadania</option>
+                    <option value="   •">↳ Wcięte podzadanie</option>
+                </select>
+                <input type="text" id="daily-input" placeholder="Wpisz treść..." style="flex:1;" onkeydown="if(event.key==='Enter') addDailyEntry()">
+                <button class="btn-action" onclick="addDailyEntry()">Dopisz</button>
+            </div>
+            <span class="page-number">10</span>
+        `;
+    }
+
+    function addDailyEntry() {
+        const type = document.getElementById('daily-type').value;
+        const text = document.getElementById('daily-input').value.trim();
+        if (!text) return;
+        state.dailyLogEntries.push({ type, text });
+        if (state.dailyLogEntries.length >= 5) state.completedSpreads[5] = true;
+        saveState();
+        renderCurrentSpread();
+    }
+
+    // -------------------- ROZKŁADÓWKA 6: DZIENNIK MIESIĘCZNY (MONTHLY LOG) --------------------
+    function renderSpread6(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł II • Widok z Lotu Ptaka</span>
+            <div class="sketch-header-box">STEP 3: MONTHLY LOG (DZIENNIK MIESIĘCZNY)</div>
+            <p>Tworzony na początku miesiąca na dwóch sąsiadujących stronach: <strong>Lewa strona to Oś Kalendarza</strong> (dni 1–30 z literą dnia tygodnia), a <strong>Prawa strona to Lista Zadań (Tasks)</strong> na ten miesiąc.</p>
+            
+            <!-- Diagram rozkładówki Monthly Log jak na obrazku Quick Reference Guide -->
+            <div class="mini-spread-diagram">
+                <div class="mini-spread-page">
+                    <div class="mini-spread-title"><span>JUNE</span></div>
+                    <div>1 W</div>
+                    <div>2 T</div>
+                    <div>3 F &nbsp; O Birthday</div>
+                    <div>4 S</div>
+                    <div>5 S &nbsp; Saw parents</div>
+                    <div>6 M &nbsp; O Meeting 9A</div>
+                    <div>10 F &nbsp; New phone!</div>
+                    <span class="mini-page-num left">5</span>
+                </div>
+                <div class="mini-spread-page">
+                    <div class="mini-spread-title"><span>TASKS</span></div>
+                    <div>• Plan party</div>
+                    <div>• Make gift list</div>
+                    <div>• Hike</div>
+                    <div>• Wymienić opony</div>
+                    <span class="mini-page-num right">6</span>
+                </div>
+            </div>
+
+            <div class="pro-tip-box">
+                <strong>PRO TIP (z Quick Reference Guide):</strong> Wykorzystuj oś kalendarza po lewej stronie również jako <strong>Kronikę Wspomnień (Notable Snippets)</strong>! Dopisuj tam po fakcie krótkie migawki z życia (np. <em>5 S – Widziałem się z rodzicami</em>, <em>10 F – Nowy telefon</em>), do których miło będzie wrócić po latach.
+            </div>
+            <span class="page-number">11</span>
+        `;
+
+        if (state.monthlyEventAdded && state.monthlyMemoryAdded && state.monthlyTaskAdded) state.completedSpreads[6] = true;
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">🗓️ ĆWICZENIE 5: Monthly Log + Wspomnienia</h3>
+                ${state.completedSpreads[6] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.85rem;">Wykonaj 3 akcje na makiecie miesiąca: 1) Dodaj wspomnienie (<em>Snippet</em>) przy <strong>12 Пt</strong>, 2) Wpisz spotkanie przy <strong>15 Пn</strong>, 3) Dodaj zadanie miesięczne po prawej stronie:</p>
+            
+            <div class="mini-spread-diagram" style="min-height:220px; font-size:1.22rem;">
+                <div class="mini-spread-page">
+                    <div class="mini-spread-title"><span>PAŹDZIERNIK</span></div>
+                    <div>11 Cz</div>
+                    <div>12 Pt &nbsp; ${state.monthlyMemoryAdded ? '<span style="color:var(--ink-blue)">Pierwszy bieg 5km!</span>' : '<button class="btn-outline" style="font-size:0.72rem; padding:1px 6px;" onclick="state.monthlyMemoryAdded=true; saveState(); renderCurrentSpread();">+ Wspomnienie: Bieg 5km</button>'}</div>
+                    <div>13 Sb &nbsp; O Urodziny Tomka</div>
+                    <div>14 Nd</div>
+                    <div>15 Pn &nbsp; ${state.monthlyEventAdded ? '<span style="color:var(--ink-green)">O Spotkanie 9:00</span>' : '<button class="btn-outline" style="font-size:0.72rem; padding:1px 6px;" onclick="state.monthlyEventAdded=true; saveState(); renderCurrentSpread();">+ Wpisz: O Spotkanie 9:00</button>'}</div>
+                    <div>16 Wt</div>
+                </div>
+                <div class="mini-spread-page">
+                    <div class="mini-spread-title"><span>TASKS (ZADANIA)</span></div>
+                    <div>• Zaplanować przyjęcie</div>
+                    <div>• Zrobić listę prezentów</div>
+                    <div>${state.monthlyTaskAdded ? '<span style="color:var(--ink-green)">• Zrobić przegląd roweru</span>' : '<button class="btn-outline" style="font-size:0.72rem; padding:1px 6px;" onclick="state.monthlyTaskAdded=true; saveState(); renderCurrentSpread();">+ Dodaj: • Przegląd roweru</button>'}</div>
+                </div>
+            </div>
+            <span class="page-number">12</span>
+        `;
+    }
+
+    // -------------------- ROZKŁADÓWKA 7: DZIENNIK PRZYSZŁOŚCI (FUTURE LOG) --------------------
+    function renderSpread7(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł II • Planowanie Długoterminowe</span>
+            <div class="sketch-header-box">STEP 2: FUTURE LOG (DZIENNIK PRZYSZŁOŚCI)</div>
+            <p>Zaraz za Indeksem rezerwujemy 2–4 strony na <strong>Future Log</strong>. Dzielimy je poziomymi liniami na 6 sekcji miesięcznych. Trafiają tu wydarzenia i zadania przypadające na kolejne miesiące (oznaczone strzałką w lewo <span class="sym-tag">&lt;</span>).</p>
+            
+            <!-- Diagram rozkładówki Future Log jak na obrazku Quick Reference Guide -->
+            <div class="mini-spread-diagram">
+                <div class="mini-spread-page" style="padding:6px 10px;">
+                    <div class="mini-spread-title"><span>FUTURE LOG</span></div>
+                    <div style="border-bottom:1.5px solid #222; padding:3px 0;"><strong>JAN</strong><br>O 1 – Nowy Rok</div>
+                    <div style="border-bottom:1.5px solid #222; padding:3px 0;"><strong>FEB</strong><br>• Zbudować altanę (Build shed)</div>
+                    <div style="padding:3px 0;"><strong>MAR</strong></div>
+                    <span class="mini-page-num left">1</span>
+                </div>
+                <div class="mini-spread-page" style="padding:6px 10px;">
+                    <div class="mini-spread-title"><span>FUTURE LOG</span></div>
+                    <div style="border-bottom:1.5px solid #222; padding:3px 0;"><strong>APR</strong></div>
+                    <div style="border-bottom:1.5px solid #222; padding:3px 0;"><strong>MAY</strong></div>
+                    <div style="padding:3px 0;"><strong>JUN</strong><br>O 3 – Urodziny (Birthday)</div>
+                    <span class="mini-page-num right">2</span>
+                </div>
+            </div>
+
+            <div class="pro-tip-box">
+                <strong>WARIACJE Z PRZEWODNIKA:</strong> Na dole planszy <em>Quick Reference Guide</em> Kim Alvarez wymienia świetne alternatywy dla klasycznego Future Logu: <strong>Metodę Alastaira (Alastair Method)</strong> – w której rysujesz wąskie kolumny z inicjałami miesięcy (J, F, M, A, M, J) i stawiasz kropkę w odpowiedniej kolumnie obok zadania – oraz system <strong>Calendex</strong>.
+            </div>
+            <span class="page-number">13</span>
+        `;
+
+        if (state.futureMigrated[0] && state.futureMigrated[1]) state.completedSpreads[7] = true;
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">🚀 ĆWICZENIE 6: Przenieś do Future Log (&lt;)</h3>
+                ${state.completedSpreads[7] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.86rem;">Kliknij w kropki poniższych zadań z bieżącego dnia, aby zamienić je na symbol zaplanowania (<span class="sym-tag">&lt;</span>) i wysłać do odpowiednich boksów w Future Logu:</p>
+
+            <div class="handwritten-card">
+                <div style="font-weight:bold; font-size:1.15rem; color:#555;">Bieżący Daily Log:</div>
+                <div style="display:flex; align-items:center; gap:10px; margin:6px 0;">
+                    <button class="bullet-btn" onclick="state.futureMigrated[0]=true; saveState(); renderCurrentSpread();">${state.futureMigrated[0] ? '&lt;' : '•'}</button>
+                    <span>Zacząć odkładać na prezent rocznicowy (Czerwiec)</span>
+                </div>
+                <div style="display:flex; align-items:center; gap:10px; margin:6px 0;">
+                    <button class="bullet-btn" onclick="state.futureMigrated[1]=true; saveState(); renderCurrentSpread();">${state.futureMigrated[1] ? '&lt;' : '•'}</button>
+                    <span>16.09 Wizyta u weterynarza (Wrzesień)</span>
+                </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-top:10px;">
+                <div class="handwritten-card" style="margin:0; min-height:95px;">
+                    <div style="border-bottom:1.5px solid #222; font-weight:bold;">CZERWIEC (JUN)</div>
+                    ${state.futureMigrated[0] ? '<div style="color:var(--ink-green)">• Budżet na prezent rocznicowy</div>' : '<div style="color:#aaa; font-size:1.1rem;">(kliknij kropkę wyżej)</div>'}
+                </div>
+                <div class="handwritten-card" style="margin:0; min-height:95px;">
+                    <div style="border-bottom:1.5px solid #222; font-weight:bold;">WRZESIEŃ (SEP)</div>
+                    ${state.futureMigrated[1] ? '<div style="color:var(--ink-green)">O 16.09 Weterynarz</div>' : '<div style="color:#aaa; font-size:1.1rem;">(kliknij kropkę wyżej)</div>'}
+                </div>
+            </div>
+            <span class="page-number">14</span>
+        `;
+    }
+
+    // -------------------- ROZKŁADÓWKA 8: KOLEKCJE NIESTANDARDOWE --------------------
+    function renderSpread8(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł II • Nieskończone Możliwości</span>
+            <div class="sketch-header-box">COLLECTIONS (KOLEKCJE POWIĄZANYCH MYŚLI)</div>
+            <p>W przewodniku <em>Tiny Ray of Sunshine</em> czytamy: <strong>„Każdy wpis w Bullet Journalu jest z definicji Kolekcją”</strong>. Kiedy chcesz zebrać powiązane ze sobą pomysły (listę zakupów, plan projektu, notatki ze spotkań czy książki), po prostu:</p>
+            <ol>
+                <li>Otwierasz <strong>najbliższą czystą rozkładówkę</strong> w notatniku.</li>
+                <li>Nadajesz jej <strong>Tytuł (Topic)</strong> i wypełniasz za pomocą <em>Bullets & Signifiers</em>.</li>
+                <li>Dopisujesz numer strony do <strong>Indeksu</strong> na początku zeszytu!</li>
+            </ol>
+            <div class="handwritten-card">
+                <span class="card-label">Przykład z Indeksu Kim Alvarez</span>
+                <div><strong>Meetings (Spotkania): 7, 11–12</strong></div>
+                <div style="font-size:1.15rem; color:#444;">Nawet jeśli Twoje notatki ze spotkań są rozrzucone na stronie 7 oraz stronach 11–12 pomiędzy codziennymi zapiskami, jeden wpis w Indeksie spina je w całość!</div>
+            </div>
+            <span class="page-number">15</span>
+        `;
+
+        if (state.customIndexed) state.completedSpreads[8] = true;
+
+        let booksHtml = state.customBooks.map(b => `<div>• ${b}</div>`).join('');
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">📚 ĆWICZENIE 7: Własna Kolekcja i Indeksowanie</h3>
+                ${state.completedSpreads[8] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.86rem;">Na stronie 16 otworzyliśmy nową kolekcję. Możesz dopisać do niej własną pozycję, a następnie kliknij przycisk poniżej, aby zaindeksować stronę:</p>
+
+            <div class="handwritten-card">
+                <div style="border-bottom:1.5px solid #222; font-weight:bold; margin-bottom:6px;">KSIĄŻKI DO PRZECZYTANIA</div>
+                ${booksHtml}
+            </div>
+
+            <div style="display:flex; gap:8px; margin-bottom:12px;">
+                <input type="text" id="book-input" placeholder="Dopisz tytuł książki..." style="flex:1;" onkeydown="if(event.key==='Enter') addBook()">
+                <button class="btn-outline" onclick="addBook()">+ Dodaj</button>
+            </div>
+
+            <button class="btn-action" onclick="state.customIndexed=true; saveState(); renderCurrentSpread();">
+                📌 Dopisz "Książki do przeczytania: 16" do Indeksu
+            </button>
+            ${state.customIndexed ? `<p style="color:var(--ink-green); font-size:0.84rem; margin-top:8px;">✓ Gotowe! Kolekcja została trwale zapisana w Indeksie.</p>` : ''}
+            <span class="page-number">16</span>
+        `;
+    }
+
+    function addBook() {
+        const val = document.getElementById('book-input').value.trim();
+        if (!val) return;
+        state.customBooks.push(val);
+        saveState();
+        renderCurrentSpread();
+    }
+
+    // -------------------- ROZKŁADÓWKA 9: SZTUKA MIGRACJI (NAPRAWIONE WYKREŚLANIE LINII!) --------------------
+    function renderSpread9(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł III • Fundament Systemu</span>
+            <div class="sketch-header-box">MIGRATION (SZTUKA MIGRACJI)</div>
+            <div class="bujo-quote">
+                „Migracja to różnica między byciem zajętym a byciem produktywnym.” – Ryder Carroll
+            </div>
+            <p>Pod koniec miesiąca przeglądasz poprzednie strony w poszukiwaniu niewykonanych zadań (<span class="sym-tag">•</span>). Przy każdym zadajesz sobie pytanie: <strong>„Czy to nadal jest warte mojego czasu?”</strong> i wybierasz jedną z 3 dróg opisanych na planszy <em>Quick Reference Guide</em>:</p>
+            <ul>
+                <li><strong>1. Zmigruj (<span class="sym-tag">&gt;</span>):</strong> Jeśli zadanie jest ważne w nadchodzącym miesiącu, zamień kropkę na <span class="sym-tag">&gt;</span> i przepisz je ręcznie do nowego <em>Monthly Log</em>.</li>
+                <li><strong>2. Zaplanuj (<span class="sym-tag">&lt;</span>):</strong> Jeśli zadanie trzeba zrobić, ale dopiero za kilka miesięcy, zamień kropkę na <span class="sym-tag">&lt;</span> i przepisz do <em>Future Log</em>.</li>
+                <li><strong>3. Wykreśl całą linię (<span class="struck">• Zadanie</span>):</strong> Jeśli zadanie straciło sens, <strong>przekreśl całą linijkę tekstu razem z kropką</strong>. Usuń szum!</li>
+            </ul>
+            <span class="page-number">17</span>
+        `;
+
+        const allDecided = state.migrationItems.every(it => it.decision !== null);
+        if (allDecided) state.completedSpreads[9] = true;
+
+        let oldMonthHtml = state.migrationItems.map((it, idx) => {
+            const isStruck = it.decision === 'strike';
+            let sym = '•';
+            if (it.decision === 'migrate') sym = '&gt;';
+            if (it.decision === 'schedule') sym = '&lt;';
+
+            return `
+                <div style="display:flex; align-items:center; justify-content:space-between; border-bottom:1px dotted #ccc; padding:6px 0; gap:8px;">
+                    <span class="handwritten ${isStruck ? 'struck' : ''}" style="font-size:1.32rem;">
+                        <strong>${sym}</strong> ${it.text}
+                    </span>
+                    <div style="display:flex; gap:3px; flex-shrink:0;">
+                        <button class="btn-outline ${it.decision==='migrate'?'selected':''}" style="padding:2px 7px; font-size:0.72rem;" onclick="decideMigration(${idx}, 'migrate')" title="Przepisz na Nowy Miesiąc">Zmigruj (&gt;)</button>
+                        <button class="btn-outline ${it.decision==='schedule'?'selected':''}" style="padding:2px 7px; font-size:0.72rem;" onclick="decideMigration(${idx}, 'schedule')" title="Przenieś do Future Log">Future (&lt;)</button>
+                        <button class="btn-outline ${it.decision==='strike'?'selected':''}" style="padding:2px 7px; font-size:0.72rem;" onclick="decideMigration(${idx}, 'strike')" title="Przekreśl całą linię tekstu">Wykreśl linię</button>
+                    </div>
+                </div>
+            `;
+        }).join('');
+
+        let newMonthHtml = state.migrationItems
+            .filter(it => it.decision === 'migrate')
+            .map(it => `<div class="handwritten" style="color:var(--ink-green);">• ${it.text} <em>(w nowym Monthly Log)</em></div>`)
+            .join('');
+
+        let futureHtml = state.migrationItems
+            .filter(it => it.decision === 'schedule')
+            .map(it => `<div class="handwritten" style="color:var(--ink-blue);">• ${it.text} <em>(w Future Log)</em></div>`)
+            .join('');
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">🔄 ĆWICZENIE 8: Praktyczna Migracja</h3>
+                ${state.completedSpreads[9] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.84rem;">Podejmij decyzję dla 4 zaległych zadań ze starego miesiąca. Zobaczysz, jak przycisk <strong>"Wykreśl linię"</strong> przekreśla cały nieistotny wiersz wraz z kropką:</p>
+
+            <div class="handwritten-card" style="padding:10px 14px;">
+                <div style="font-weight:bold; font-size:1.05rem; color:#555; border-bottom:1px solid #ccc; margin-bottom:4px;">STARY MIESIĄC (Niewykonane zadania):</div>
+                ${oldMonthHtml}
+            </div>
+
+            <div class="handwritten-card" style="padding:10px 14px; min-height:95px;">
+                <div style="font-weight:bold; font-size:1.05rem; color:var(--ink-primary); border-bottom:1px solid #ccc; margin-bottom:4px;">PRZEPISANE DALEJ (Odsiane od szumu):</div>
+                ${(newMonthHtml + futureHtml) || '<div style="color:#999; font-size:1.15rem;">(Wybierz opcje powyżej, aby przefiltrować listę...)</div>'}
+            </div>
+            <span class="page-number">18</span>
+        `;
+    }
+
+    function decideMigration(idx, dec) {
+        state.migrationItems[idx].decision = dec;
+        saveState();
+        renderCurrentSpread();
+    }
+
+    // -------------------- ROZKŁADÓWKA 10: REFLEKSJA I 5x DLACZEGO --------------------
+    function renderSpread10(left, right) {
+        left.innerHTML = `
+            <span class="module-badge">Moduł III • Nawyk Regularnego Przeglądu</span>
+            <div class="sketch-header-box">DAILY REFLECTION & 5 WHYS</div>
+            <p>Na planszy <em>Quick Reference Guide</em> pod krokiem Daily Log znajduje się kluczowa wskazówka: <strong>„PRO TIP: Review Regularly (Przeglądaj regularnie)”</strong>.</p>
+            <ul>
+                <li><strong>☀️ Poranny przegląd (Planowanie):</strong> Oczyszczasz umysł (<em>Mental Inventory</em>), zapisujesz luźne myśli i wybierasz gwiazdką <span class="sym-tag">*</span> 1–2 zadania priorytetowe.</li>
+                <li><strong>🌙 Wieczorny przegląd (Refleksja):</strong> Zamykasz dzień z długopisem w ręku. Oznaczasz zrobione rzeczy jako <span class="sym-tag">X</span>, dopisujesz warte zapamiętania momenty w <em>Monthly Log</em> i bez żalu <strong>przekreślasz całą linią</strong> zadania, które nie są warte Twojej energii.</li>
+            </ul>
+            <div class="handwritten-card">
+                <span class="card-label">Technika z książki: 5x Dlaczego</span>
+                <div>Zanim wpiszesz wielki cel na nowy miesiąc, zapytaj siebie 5 razy z rzędu „Dlaczego chcę to zrobić?”. To chroni Twój czas przed realizowaniem cudzych oczekiwań.</div>
+            </div>
+            <span class="page-number">19</span>
+        `;
+
+        const checksDone = state.reflectionChecks.every(Boolean);
+        if (checksDone) state.completedSpreads[10] = true;
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">🧘 ĆWICZENIE 9: Codzienny Rytuał BuJo</h3>
+                ${state.completedSpreads[10] ? '<span class="stamp-completed">✓ Ukończono</span>' : ''}
+            </div>
+            <p style="font-size:0.86rem;">Zaznacz 3 filary codziennej refleksji i wpisz swoją główną intencję na ten tydzień:</p>
+
+            <div class="handwritten-card">
+                <label style="display:block; cursor:pointer; margin-bottom:8px;">
+                    <input type="checkbox" ${state.reflectionChecks[0]?'checked':''} onchange="toggleRefCheck(0)"> 
+                    1. Rano: Zrzut myśli na papier i wybór priorytetu (*)
+                </label>
+                <label style="display:block; cursor:pointer; margin-bottom:8px;">
+                    <input type="checkbox" ${state.reflectionChecks[1]?'checked':''} onchange="toggleRefCheck(1)"> 
+                    2. Wieczorem: Odznaczenie wykonanych zadań (X) i dopisanie wspomnień
+                </label>
+                <label style="display:block; cursor:pointer;">
+                    <input type="checkbox" ${state.reflectionChecks[2]?'checked':''} onchange="toggleRefCheck(2)"> 
+                    3. Bezlitosne przekreślanie zadań nieistotnych (usuwanie szumu)
+                </label>
+            </div>
+
+            <div style="margin-top:14px;">
+                <label style="font-size:0.85rem; font-weight:bold; display:block; margin-bottom:6px;">Twoje najważniejsze zadanie na ten tydzień (z gwiazdką *):</label>
+                <div style="display:flex; align-items:center; gap:8px;">
+                    <span class="handwritten" style="color:var(--ink-red); font-weight:bold;">* •</span>
+                    <input type="text" placeholder="np. Założyć własny papierowy notes w kropki..." value="${state.intentionText}"
+                        oninput="state.intentionText=this.value; saveState();" style="flex:1;">
+                </div>
+            </div>
+            <span class="page-number">20</span>
+        `;
+    }
+
+    function toggleRefCheck(idx) {
+        state.reflectionChecks[idx] = !state.reflectionChecks[idx];
+        saveState();
+        renderCurrentSpread();
+    }
+
+    // -------------------- ROZKŁADÓWKA 11: PIASKOWNICA BUJO I PODSUMOWANIE --------------------
+    function renderSpread11(left, right) {
+        state.completedSpreads[11] = true;
+
+        left.innerHTML = `
+            <span class="module-badge">Zakończenie Kursu • Złote Zasady</span>
+            <div class="sketch-header-box">ENDLESS POSSIBILITIES!</div>
+            <p>Gratulacje${state.userName ? ', <strong>' + state.userName + '</strong>' : ''}! Znasz już cały system Rydera Carrolla oraz wizualny przewodnik <em>Tiny Ray of Sunshine</em>. Pamiętaj o najważniejszych wskazówkach na start:</p>
+            <ol>
+                <li><strong>Używaj go tak, jak TY potrzebujesz:</strong> Na początku trzymaj się prostego szkieletu (<em>Index, Future Log, Monthly Log, Daily Log</em>), a własne kolekcje dodawaj tylko wtedy, gdy naprawdę ich potrzebujesz.</li>
+                <li><strong>Nie bój się skreśleń:</strong> Przekreślona linia to znak, że świadomie obroniłeś swój czas przed czymś nieistotnym.</li>
+                <li><strong>Powrót w każdej chwili:</strong> Jeśli pominiesz kilka dni lub tygodni, po prostu wpisz dzisiejszą datę i pisz dalej.</li>
+            </ol>
+            <div style="margin-top:14px; display:flex; gap:8px; flex-wrap:wrap;">
+                <button class="btn-outline" onclick="toggleKeyModal()">🔑 Klucz Symboli</button>
+                <button class="btn-outline" onclick="toggleGuideModal()">🗺️ Schemat 4 Kroków</button>
+                <button class="btn-outline" onclick="resetCourse()">🔄 Wyczyść postęp</button>
+            </div>
+            <span class="page-number">21</span>
+        `;
+
+        let sandboxHtml = state.sandboxItems.map((item, idx) => `
+            <li class="bujo-item ${item.struck ? 'row-struck' : ''}" style="background:rgba(255,255,255,0.65); border:1px dashed #ccc;">
+                <button class="signifier-btn" onclick="cycleSandboxSig(${idx})" title="Kliknij, aby zmienić Signifier (* ➔ ! ➔ 👁)">
+                    ${item.sig || '·'}
+                </button>
+                <button class="bullet-btn" onclick="cycleSandboxBullet(${idx})" title="Kliknij, aby zmienić punktor (• ➔ X ➔ > ➔ < ➔ O ➔ –)">
+                    ${item.bullet}
+                </button>
+                <span class="bujo-text ${item.struck ? 'struck' : ''}" style="flex:1;">${item.text}</span>
+                <button class="strike-btn" onclick="toggleSandboxStrike(${idx})">${item.struck ? 'Cofnij' : 'Wykreśl linię'}</button>
+                <button class="strike-btn" onclick="removeSandboxItem(${idx})" title="Usuń wpis">✕</button>
+            </li>
+        `).join('');
+
+        right.innerHTML = `
+            <div class="workshop-header">
+                <h3 class="workshop-title">✏️ PIASKOWNICA BUJO (Twój arkusz testowy)</h3>
+                <span class="stamp-completed">Wolna Kartka</span>
+            </div>
+            <p style="font-size:0.84rem;">Dodawaj własne wpisy i testuj cały system: klikaj w oznaczenia (<span class="sym-tag">*</span>, <span class="sym-tag">!</span>, <span class="sym-tag">👁</span>), przekształcaj kropki (<span class="sym-tag">•</span> ➔ <span class="sym-tag">X</span> ➔ <span class="sym-tag">&gt;</span> ➔ <span class="sym-tag">&lt;</span>) lub przekreślaj całe porzucone linie:</p>
+
+            <div style="display:flex; gap:6px; margin-bottom:12px;">
+                <select id="sb-sig" style="width:70px;">
+                    <option value="">Brak</option>
+                    <option value="*">* Priorytet</option>
+                    <option value="!">! Idea</option>
+                    <option value="👁">👁 Zbadaj</option>
+                </select>
+                <select id="sb-bullet" style="width:110px;">
+                    <option value="•">• Zadanie</option>
+                    <option value="O">O Wydarzenie</option>
+                    <option value="–">– Notatka</option>
+                </select>
+                <input type="text" id="sb-text" placeholder="Wpisz własną notatkę BuJo..." style="flex:1;" onkeydown="if(event.key==='Enter') addSandboxItem()">
+                <button class="btn-action" onclick="addSandboxItem()">Dodaj</button>
+            </div>
+
+            <ul class="bujo-list">
+                ${sandboxHtml}
+            </ul>
+            <span class="page-number">22</span>
+        `;
+    }
+
+    function addSandboxItem() {
+        const sig = document.getElementById('sb-sig').value;
+        const bullet = document.getElementById('sb-bullet').value;
+        const text = document.getElementById('sb-text').value.trim();
+        if (!text) return;
+        state.sandboxItems.push({ sig, bullet, text, struck: false });
+        saveState();
+        renderCurrentSpread();
+    }
+
+    function cycleSandboxBullet(idx) {
+        const order = ["•", "X", ">", "<", "O", "–"];
+        const curr = state.sandboxItems[idx].bullet;
+        state.sandboxItems[idx].bullet = order[(order.indexOf(curr) + 1) % order.length];
+        saveState();
+        renderCurrentSpread();
+    }
+
+    function cycleSandboxSig(idx) {
+        const order = ["", "*", "!", "👁"];
+        const curr = state.sandboxItems[idx].sig;
+        state.sandboxItems[idx].sig = order[(order.indexOf(curr) + 1) % order.length];
+        saveState();
+        renderCurrentSpread();
+    }
+
+    function toggleSandboxStrike(idx) {
+        state.sandboxItems[idx].struck = !state.sandboxItems[idx].struck;
+        saveState();
+        renderCurrentSpread();
+    }
+
+    function removeSandboxItem(idx) {
+        state.sandboxItems.splice(idx, 1);
+        saveState();
+        renderCurrentSpread();
+    }
+
+    // ==================== FUNKCJE NAWIGACJI I POMOCNICZE ====================
+    function changeSpread(delta) {
+        const next = state.currentSpread + delta;
+        if (next >= 0 && next < spreadsMeta.length) {
+            state.currentSpread = next;
+            saveState();
+            renderCurrentSpread();
+        }
+    }
+
+    function goToSpread(idx) {
+        state.currentSpread = idx;
+        saveState();
+        renderCurrentSpread();
+    }
+
+    function toggleKeyModal() {
+        document.getElementById('key-modal').classList.toggle('active');
+    }
+
+    function toggleGuideModal() {
+        document.getElementById('guide-modal').classList.toggle('active');
+    }
+
+    function updateProgressUI() {
+        const total = spreadsMeta.filter(m => m.indexable).length;
+        const doneCount = Object.keys(state.completedSpreads).filter(k => state.completedSpreads[k]).length;
+        document.getElementById('progress-text').textContent = `${doneCount} / ${total}`;
+        document.getElementById('progress-fill').style.width = `${Math.min(100, Math.round((doneCount / total) * 100))}%`;
+    }
+
+    function resetCourse() {
+        if (confirm("Czy na pewno chcesz wyczyścić wszystkie ćwiczenia i rozpocząć kurs od nowa?")) {
+            localStorage.removeItem(STORAGE_KEY);
+            location.reload();
+        }
+    }
+
+
+    function toggleAuthorPanel() {
+        const panel = document.getElementById('author-panel');
+        const open = panel.classList.toggle('active');
+        document.querySelector('.author-tab').setAttribute('aria-expanded', open);
+    }
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') document.getElementById('author-panel').classList.remove('active');
+    });
+
+    // Inicjalizacja po załadowaniu DOM
+    window.addEventListener('DOMContentLoaded', () => {
+        loadState();
+        renderCurrentSpread();
+    });
+</script>
+
+</body>
+</html>
